@@ -18,8 +18,9 @@ invest_return = 0.04
 portion_down_payment = 0.25
 down_payment = 250000
 current_savings = 0
-portion_saved = random.randint(0, 10000)/10000
+epsilon = 100
 
+portion_saved = 0.5
 minumum = 0.0001
 maximum = 1.0
 test = 0
@@ -27,7 +28,7 @@ test = 0
 if (annual_salary*3 < down_payment):
     print("It is not possible for youto pay the down payment in three years.")
 else:
-    while (current_savings < down_payment-100 or current_savings > down_payment+100):
+    while (abs(current_savings - down_payment) >= 100):
         if (test!=0 and portion_saved > minumum):
             if (current_savings < down_payment-100):
                 minumum = portion_saved
