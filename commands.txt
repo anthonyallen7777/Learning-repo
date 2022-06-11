@@ -1,0 +1,8 @@
+c++
+cl /EHsc leetcode.cpp && leetcode
+
+c
+cl /EHsc leetcode.c && leetcode
+
+nodejs
+node --max-old-space-size=16384 index.js

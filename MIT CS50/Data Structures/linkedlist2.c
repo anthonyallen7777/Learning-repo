@@ -3,7 +3,7 @@
 
 typedef struct node
 {
-    int number;
+    int val;
     struct node *next;
 }
 node;
@@ -18,7 +18,7 @@ int main(void)
     {
         return 1;
     }
-    n->number = 2;
+    n->val = 2;
     n->next = NULL;
     list = n;
 
@@ -28,7 +28,7 @@ int main(void)
         free(list);
         return 1;
     }
-    n->number = 4;
+    n->val = 4;
     n->next = NULL;
     list->next = n;
 
@@ -40,13 +40,13 @@ int main(void)
         return 1;
     }
 
-    n->number = 5;
+    n->val = 5;
     n->next = NULL;
     list->next->next = n;
     
     for (node *tmp = list; tmp != NULL; tmp = tmp->next)
     {
-        printf("%i\n", tmp->number);
+        printf("%i\n", tmp->val);
     }
 
     while (list != NULL) {
