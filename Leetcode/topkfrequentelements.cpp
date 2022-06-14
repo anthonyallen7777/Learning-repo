@@ -24,7 +24,7 @@ public:
         }
         
         //loop over the map of numbers with frequency values
-        for (auto& itr = my_map_.begin(); itr != my_map_.end(); ++itr) {
+        for (auto itr = my_map_.begin(); itr != my_map_.end(); ++itr) {
             //find the index of the frequency in first dimension of our 2d array
             //if the number is 1 and the frequency is 3
             //we would be at the 3rd index of the array now
