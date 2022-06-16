@@ -3,73 +3,65 @@
 #include <vector>
 #include <string>
 #include <map>
-#include <numeric>
 
 using namespace std;
 
 class Solution {
 public:
-    vector<int> productExceptSelf(vector<int>& nums) {
-        int argSize = nums.size();
-        vector<int> vec1(argSize);
-        vector<int> vec2(argSize);
-        vector<int> r(argSize);
-        vec1.front() = nums.front();
-        for (int i = 1; i < argSize; i++) {
-            vec1[i] = vec1[i-1] * nums[i];
-        }
-        vec2.back() = nums.back();
-        for (int i = argSize-2; i > -1; i--) {
-            vec2[i] = vec2[i+1] * nums[i];
-        }
-        r.front() = vec2[1];
-        r.back() = vec1[argSize-2];
-        for (int i = 1; i < argSize-1; i++) {
-            r[i] = vec1[i-1] * vec2[i+1];
-        }
-        cout << '[';
-        for (unsigned int i = 0; i < argSize; i++) {
-            if (i == argSize-1) cout << r[i]; else cout << r[i] << ",";
-        }
-        cout << ']';
+    bool isValidSudoku(vector<vector<char>>& board) {
+      vector<vector<int>> quadIncrement(9, vector<int>(10,0));
+      vector<vector<int>> columnIncrement(9, vector<int>(10,0));
+      vector<int> rowIncrement(10,0);
 
-        return r;
+      //this n^2 loop checks for duplicates in each quadrant
+      //(which is at worst 81 (9*9))
+      int quadrantCount = 0;
+      for (int i = 0; i < board.size(); i++) {
+        if (i < 3) quadrantCount = 0; else if (i < 6) quadrantCount = 3; else quadrantCount = 6;
+        int x = 0;
+        for (int j = 0; j < board[i].size(); j++) {
+          if (x != 0 && x % 3 == 0) quadrantCount += 1;
+          if (isdigit(board[i][j])) {
+            int c = int(board[i][j])-'0';
+            quadIncrement[quadrantCount][c] += 1;
+            columnIncrement[j][c] += 1;
+            rowIncrement[c] += 1;
+            //check quad
+            if (quadIncrement[quadrantCount][c] > 1) {
+              return false;
+            }
+            //check row
+            if (rowIncrement[c] > 1) {
+              return false;
+            }
+            //check column
+            if (columnIncrement[j][c] > 1) {
+              return false;
+            }
+          }
+          x += 1;
+        }
+
+        //reset quadrant and row
+        quadrantCount = 0;
+        rowIncrement = vector<int>(10,0);
+      }
+
+      return true;
     }
 };
-
-        /*
-        bool positiveBool = true;
-        for (auto& i: nums) {
-            if (i < 0) {
-                positiveBool = false;
-            } else {
-                positiveBool = true;
-            }
-        }
-        
-        vector<int> products(nums.size(),0);
-        for (int i = 0; i < nums.size(); i++) {
-            int prevI = (i == 0) ? prevI = nums.back() : prevI = nums[i-1];
-            int nextI = (i == nums.size()-1) ? nextI = nums.front() : nextI = nums[i+1];
-            products[i] = prevI * nextI;
-        }
-        
-        for (int i = 0; i < nums.size(); i++) {
-            int nextI = (i >= nums.size()-2) ? nextI = nums[i-(nums.size()-2)] : nextI = nums[i+2];
-            cout << products[i] << " * " << nextI << " = " << products[i] * nextI << '\n';
-            products[i] = products[i] * nextI;
-        }
-        cout << "\n";
-        for (unsigned int i = 0; i < products.size(); i++) {
-            cout << products[i] << ",";
-        }
-        cout << "\n";
-        */
 
 int main ()
 {
   Solution class1;
-  vector<int> nums1 = { 1,2,3,4 };
-  vector<int> nums2 = { -1,1,0,-3,3 };
-  class1.productExceptSelf(nums2);
+  vector<vector<char>> board1 = {{'5','3','.','.','7','.','.','.','.'},
+  {'6','.','.','1','9','5','.','.','.'},
+  {'.','9','8','.','.','.','.','6','.'},
+  {'8','.','.','.','6','.','.','.','3'},
+  {'4','.','.','8','.','3','.','.','1'},
+  {'7','.','.','.','2','.','.','.','6'},
+  {'.','6','.','.','.','.','2','8','.'},
+  {'.','.','.','4','1','9','.','.','5'},
+  {'.','.','.','.','8','.','.','7','9'}};
+  class1.isValidSudoku(board1);
 };
