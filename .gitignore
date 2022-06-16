@@ -5,3 +5,6 @@
 /.vscode
 Leetcode/leetcode.obj
 Leetcode/leetcode.exe
+/OpenGL/glad
+/OpenGL/*
+!OpenGL/Sudoku
