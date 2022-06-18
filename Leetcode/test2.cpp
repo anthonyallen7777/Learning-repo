@@ -7,10 +7,10 @@
 using namespace std;
 
 int main () {
-    cout << (0 - -1);
+    cout << (2 % 2);
 
     vector<int> YOOO;
     for (unsigned int i = 0; i < YOOO.size(); i++) {
-        cout << YOOO[i] << "\n";
+        //cout << YOOO[i] << "\n";
     }
 };
