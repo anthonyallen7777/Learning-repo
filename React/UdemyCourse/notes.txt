@@ -1,0 +1,15 @@
+javascript refresher
+classes:
+- blueprints for objects
+- can have properties and methods
+- methods: functions attached to classes
+- properties: variables attached to classes
+
+class Person {
+	name = 'Max' #Property
+	call = () => {...} #Method
+}
+
+const myPerson = new Person()
+myPerson.call()
+console.log(myPerson.name)
