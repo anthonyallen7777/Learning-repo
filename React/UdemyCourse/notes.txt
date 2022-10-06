@@ -117,4 +117,72 @@ console.log(num1, num2); // 1 2
 
 [num1, , num3] = numbers;
 console.log(num1, num3); // 1 3
+--------
+REFERENCE AND PRIMITIVE TYPES
 
+Primitive types:
+- numbers, strings, booleans
+- they copy the values
+
+const number = 1; //primitive type
+const num2 = number; //copies the values
+
+console.log(num2);
+
+Reference types:
+- objects, arrays
+- whereas primitive types are stored in memory, reference types store a pointer to that place in memory
+
+----
+REFERENCE
+
+const person = {
+	name: 'Max'
+}
+
+const secondPerson = person;
+
+person.name = 'Manu';
+
+console.log(secondPerson);
+
+----
+REAL COPY
+
+const person = {
+	name: 'Max'
+}
+
+const secondPerson = {
+	...person
+};
+
+person.name = 'Manu';
+
+console.log(secondPerson);
+--------
+ARRAY FUNCTIONS
+
+const numbers = [1, 2, 3];
+
+const doubleNumArray = numbers.map((num) => {
+	return num * 2;
+});
+
+console.log(numbers);
+console.log(doubleNumArray);
+--------
+
+
+base syntax
+--------
+
+linting - tool reminds you if you are writing suboptimal code
+
+npm or yarn - dependency management
+
+bundler(ex: webpack) - write module code and split up over multiple files. This code gets bundled into only a couple of files when we ship it
+
+babel + presets - compile code to run on as many browsers as possible
+
+development server - webserver running on our machine to test code
