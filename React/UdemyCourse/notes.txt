@@ -1,9 +1,12 @@
 javascript refresher
-classes:
+
+--------
+CLASSES:
 - blueprints for objects
 - can have properties and methods
 - methods: functions attached to classes
 - properties: variables attached to classes
+- supports inheritance
 
 class Person {
 	name = 'Max' #Property
@@ -13,3 +16,105 @@ class Person {
 const myPerson = new Person()
 myPerson.call()
 console.log(myPerson.name)
+
+class Person extends Master
+
+----
+class Human {
+	gender = 'male';
+
+	printGender = () => {
+	console.log(this.gender);
+	}
+}
+class Person extends Human {
+	name = 'Max';
+	gender = 'female';
+
+	printMyName = () => {
+	console.log(this.name);
+	}
+}
+
+const person = new Person();
+person.printMyName();
+person.printGender();
+----
+
+PROPERTIES
+
+ES6
+constructor() {
+	this.myProperty = 'value'
+}
+
+ES7
+myProperty = 'value'
+
+----
+
+METHODS
+
+ES6
+myMethod() {...}
+
+ES7
+myMethod = () => {...}
+
+
+--------
+OPERATORS:
+- ...
+- Spread: used to split up array elements OR object properties
+const newArray = [...oldArray, 1, 2]
+const newObject = {...oldObject, newProp:5}
+
+- Rest: used to merge a list of function arguments into an array
+function sortArgs(...args) {
+	return args.sort()
+}
+
+----
+
+const numbers = [1,2,3];
+const newNumbers = [...numbers, 4];
+
+console.log(newNumbers);
+
+const person = {
+	name: 'Max'
+};
+
+const newPersons = {
+	...person,
+	mood: 'happy'
+}
+
+console.log(newPerson);
+
+const filter = (...args) => {
+	return args.filter(el => el === 1);
+}
+
+console.log(filter(1, 2, 3));
+--------
+DESTRUCTURING
+- Easily extract array elements or object properties and store them in variables
+- Array Destructuring:
+[a, b] = ['Hello', 'Max']
+console.log(a) // Hello
+console.log(b) // Max
+
+- Object Destructuring:
+{name} = {name:'Max', mood:'happy'}
+console.log(name) // Max
+console.log(mood) // undefined
+
+----
+const number = [1, 2, 3];
+[num1, num2] = numbers;
+console.log(num1, num2); // 1 2
+
+[num1, , num3] = numbers;
+console.log(num1, num3); // 1 3
+
