@@ -186,3 +186,5 @@ bundler(ex: webpack) - write module code and split up over multiple files. This 
 babel + presets - compile code to run on as many browsers as possible
 
 development server - webserver running on our machine to test code
+
+register service worker: pre-cache script files
