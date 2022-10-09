@@ -188,3 +188,15 @@ babel + presets - compile code to run on as many browsers as possible
 development server - webserver running on our machine to test code
 
 register service worker: pre-cache script files
+
+react component always has to render some html code to the dom
+
+JSX:
+- code used to write html but is not actual html
+- etiquette says to nest everything in one root
+
+In it's simplest form a Component is just a function that returns some JSX (some html)
+
+props (properties) are the attributes you add onto your component
+
+State: change your component at runtime
