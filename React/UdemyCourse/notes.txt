@@ -197,6 +197,27 @@ JSX:
 
 In it's simplest form a Component is just a function that returns some JSX (some html)
 
-props (properties) are the attributes you add onto your component
+PROPS
+- props (properties) are the attributes you add onto your component
+- they're set and passed from outside
 
-State: change your component at runtime
+when using class-based components, it's this.props
+
+class PErson extends Component {
+	render() {
+	return <p>My name is {this.props}</p>;
+	}
+}
+
+State:
+- change your component at runtime
+- state is managed from inside the component
+- should be used with care (can make app unpredictable and hard to manage as it grows)
+
+Method:
+- a function of a class
+
+add function brackets to method in onclick will immediately execute the function once react renders the component to the dom
+
+Hook
+- can manage state in functional components
