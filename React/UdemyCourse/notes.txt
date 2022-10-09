@@ -213,11 +213,20 @@ State:
 - change your component at runtime
 - state is managed from inside the component
 - should be used with care (can make app unpredictable and hard to manage as it grows)
+- updating state also updates props
+
+Stateless Components (dumb components OR presentational components)
+- have no internal state management
+It is good practice to use stateless components as much as possible (makes app easier to maintain and manage)
+
+Stateful Components (smart components OR container components)
+- have internal state management
+- only use state in a few select components
 
 Method:
 - a function of a class
 
-add function brackets to method in onclick will immediately execute the function once react renders the component to the dom
+Dont add function brackets to method in onclick b/c will immediately execute the function once react renders the component to the dom
 
 Hook
 - can manage state in functional components
