@@ -226,7 +226,7 @@ Stateful Components (smart components OR container components)
 Method:
 - a function of a class
 
-Dont add function brackets to method in onclick b/c will immediately execute the function once react renders the component to the dom
+Dont add function brackets to method in onclick b/c will immediately execute the function once react renders the component to the dom. Instead pass a Reference
 
 Hook
 - can manage state in functional components
