@@ -274,3 +274,13 @@ testMethod = () => {
 
 Hook
 - can manage state in functional components
+
+--------
+lists & conditionals
+
+output content conditionally using javascript with ternary expression or better yet create variables
+
+map operation - use on arrays to map objects or strings, etc into array of jsx elements and react will out these elements out and render to screen
+
+add key to let react efficient update
+--------
