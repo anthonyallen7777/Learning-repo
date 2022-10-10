@@ -263,5 +263,14 @@ onClick={() => this.switchNameHandler('Jeff!!')}
  MAY WANT TO USE v
  click={this.switchNameHandler.bind(this, "Jefferey!")}>
 
+----
+testMethod = () => {
+	//using this type of method ensures that using 'this' always refers to the current class we're in
+
+	this.setState({
+	someState: 'some value'
+	})    
+}
+
 Hook
 - can manage state in functional components
