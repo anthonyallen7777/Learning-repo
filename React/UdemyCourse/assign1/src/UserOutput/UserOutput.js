@@ -1,17 +1,17 @@
 import React from 'react';
 
-const output1 = () => {
+const output1 = (props) => {
 	return (
 		<div>
-		<p>out 1</p>
+		<p>Username: {props.username}</p>
 		</div>
 		);
 };
 
-const output2 = () => {
+const output2 = (props) => {
 	return (
 		<div>
-		<p>out 2</p>
+		<p>Password: {props.password}</p>
 		</div>
 		);
 };
