@@ -1,6 +1,34 @@
 javascript refresher
 
 --------
+EXPORT & IMPORT
+
+const person = {
+	name: 'Jeff'
+}
+
+ export default person
+----
+export const clean = () => {...}
+
+export const baseData = 10;
+----
+import person from './person.js'
+import prs from './person.js'
+
+import { baseData } from './utility.js'
+import { clean } from: './utility.js'
+
+Default export:
+import person from './person.js'
+import prs from './person.js'
+
+Named export:
+import { smth } from './utility.js'
+import {smth as Smth} from './utility.js'
+import * as bundled from './utility.js'
+
+--------
 CLASSES:
 - blueprints for objects
 - can have properties and methods
@@ -182,6 +210,7 @@ linting - tool reminds you if you are writing suboptimal code
 npm or yarn - dependency management
 
 bundler(ex: webpack) - write module code and split up over multiple files. This code gets bundled into only a couple of files when we ship it
+- helps import css into js files
 
 babel + presets - compile code to run on as many browsers as possible
 
@@ -227,6 +256,12 @@ Method:
 - a function of a class
 
 Dont add function brackets to method in onclick b/c will immediately execute the function once react renders the component to the dom. Instead pass a Reference
+
+// v THIS CAN BE INEFFICIENT WHEN SCALING PROJECT
+onClick={() => this.switchNameHandler('Jeff!!')}
+
+ MAY WANT TO USE v
+ click={this.switchNameHandler.bind(this, "Jefferey!")}>
 
 Hook
 - can manage state in functional components
