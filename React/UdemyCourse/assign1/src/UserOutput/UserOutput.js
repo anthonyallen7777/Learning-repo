@@ -1,8 +1,9 @@
 import React from 'react';
+import './UserOutput.css'
 
 const output1 = (props) => {
 	return (
-		<div>
+		<div className='UserOutput'>
 		<p>Username: {props.username}</p>
 		</div>
 		);
@@ -10,7 +11,7 @@ const output1 = (props) => {
 
 const output2 = (props) => {
 	return (
-		<div>
+		<div className='UserOutput'>
 		<p>Password: {props.password}</p>
 		</div>
 		);
