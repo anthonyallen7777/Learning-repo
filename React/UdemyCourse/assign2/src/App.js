@@ -15,10 +15,12 @@ class App extends Component {
   }
 
   deleteChar = (charIndex) => {
-    let tempInput = [...this.state.pInput];
+    // let tempInput = [...this.state.pInput];
+    const tempInput = this.state.pInput.split('');
     tempInput.splice(charIndex, 1);
-    tempInput = tempInput.join('');
-    this.setState({pInput: tempInput});
+    //tempInput = tempInput.join('');
+    const upInput = tempInput.join('');
+    this.setState({pInput: upInput});
   }
 
   render() {

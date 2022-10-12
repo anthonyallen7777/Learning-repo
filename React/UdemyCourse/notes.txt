@@ -284,3 +284,4 @@ map operation - use on arrays to map objects or strings, etc into array of jsx e
 
 add key to let react efficient update
 --------
+styling

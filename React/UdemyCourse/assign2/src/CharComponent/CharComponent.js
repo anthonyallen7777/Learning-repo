@@ -3,7 +3,7 @@ import './CharStyle.css';
 
 const char = (props) => {
     let characters = null;
-    let stringArray = props.characters.split("");
+    let stringArray = props.characters.split('');
     characters = (
         <div>
             {stringArray.map((charValue, charIndex) => {
