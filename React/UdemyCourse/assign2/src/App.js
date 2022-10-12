@@ -1,5 +1,7 @@
-import './App.css';
 import React, { Component } from 'react';
+import './App.css';
+import Validation from './Validation/Validation';
+import Char from './CharComponent/CharComponent';
 
 class App extends Component {
   state = {
@@ -12,6 +14,13 @@ class App extends Component {
     });
   }
 
+  deleteChar = (charIndex) => {
+    let tempInput = [...this.state.pInput];
+    tempInput.splice(charIndex, 1);
+    tempInput = tempInput.join('');
+    this.setState({pInput: tempInput});
+  }
+
   render() {
     return (
       <div className="App">
@@ -20,6 +29,10 @@ class App extends Component {
         onChange={this.inputChange}
         value={this.state.pInput} />
         <p>Length of input: {this.state.pInput.length}</p>
+        <Validation inputLength={this.state.pInput.length} />
+        <Char 
+        characters={this.state.pInput}
+        deleteCharacter={this.deleteChar} />
       </div>
     );
   }
