@@ -319,4 +319,30 @@ const Button = styled.button``
 
 npm run eject
 - will eject from the under the hood configuration where you dont have access to the underlying web packed confile file, etc and gives you access
+
+----
+css modules feature
+
+config/webpack.config.dev.js
+config/webpack.config.prod.js
+
+modules: true,
+localIdentName: '[name]__[local]__[hash:base64:5]'
+
+app.js
+
+import classes from './App.css'
+
+<div className={classes.App}>
+
+^^^^^^
+This css modules feature detects the import from the css file and understand not to just import the css as it is and instead look into the css and transforms every class name in a random unique class and returns a map mapped to the class names we choose
+----
+react-scripts 2 and higher you must vv
+
+you can save the eject step and just
+
+import classes from './Person.modules.css';
+rename to Person.modules.css
 --------
+debugging
