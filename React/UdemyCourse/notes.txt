@@ -724,9 +724,17 @@ import React, { useContext } from "react";
 const authContext = useContext(AuthContext);
 
 console.log(authContext.authenticated);
+--------
 
+LEARN PROJECT
+----
 
+Planning a React App
+Component Tree/Component Structure
 
+Application State(Data)
+
+Components vs Containers
 
 
 
