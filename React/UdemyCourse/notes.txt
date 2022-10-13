@@ -202,7 +202,7 @@ console.log(doubleNumArray);
 --------
 
 
-base syntax
+BASE SYNTAX
 --------
 
 linting - tool reminds you if you are writing suboptimal code
@@ -276,7 +276,7 @@ Hook
 - can manage state in functional components
 
 --------
-lists & conditionals
+LISTS & CONDITIONALS
 
 output content conditionally using javascript with ternary expression or better yet create variables
 
@@ -284,7 +284,7 @@ map operation - use on arrays to map objects or strings, etc into array of jsx e
 
 add key to let react efficient update
 --------
-styling
+STYLING
 
 Radium package
 - lets us use inline styles with pseudo selectors and media queries
@@ -345,13 +345,13 @@ you can save the eject step and just
 import classes from './Person.modules.css';
 rename to Person.modules.css
 --------
-debugging
+DEBUGGING
 always check line number
 use dev tool debugger
 - source maps
-- breaks and steps (in and outs)
+- breakpoints and steps (in and outs)
 
-use the React extension for way more flexibility in testing my app
+use the React extension to get insight into app
 
 ----
 
@@ -374,3 +374,96 @@ ErrorBoundary component
 
 componentDidCatch
 - will be executed whenever a component we wrap with the ErrorBoundary throw an error
+--------
+COMPONENT DEEP DIVE
+
+the render method should be lean and not contain too much jsx
+
+containers
+- manages the state
+- manipulates the state
+
+----
+Stateful vs Stateless
+
+stateless (dumb components)
+- historically have always been functional components
+- since React 16.8 functional components can manage state with useState hook
+
+by splitting app into container components and dumb components you can keep your app manageable
+
+----
+(Use if you need to manage State or access to Lifecycle Hooks and don't want to use React Hooks)
+
+Class-based
+class XY extends Component
+- access to state
+- lifecycle hooks
+access state and props via "this"
+this.state.XY & this.props.XY
+----
+(Use in all other Cases)
+Functional
+const XY = prop => {...}
+- access to state(useState())
+X (NOT SUPPORTED YET) lifecycle hooks
+props.XY
+----
+Component Lifecycle
+- Only available in Class-based Components
+
+constructor()
+getDerivedStateFromProps()
+getSnapshotBeforeUpdate()
+componentDidCatch()
+componentWillUnmount()
+shouldComponentUpdate()
+componentDidUpdate()
+componentDidMount()
+render()
+
+(Lifecycle Hooks have nothing to do with React Hooks)
+
+CREATION
+Default ES6 class Feature - constructor(props)
+ - Call super(props)
+ - DO: Set up State
+ - DONT: Cause side-effects
+  - by side-effect it means sending http request, storing something in local browser storage, or sending analytics to google
+  - this will impact performance and cause unnecessary re-renders
+
+					|
+					v
+
+getDerivedStateFromProps(props,state)
+- when ever your props change or class-based component you can sync your state to them
+- DO: Sync state
+- DONT: Cause side-effects
+
+					|
+					v
+
+render()
+- Prepare & Structure JSX code
+- DO: Layout JSX and render html code
+- DONT:
+ - send http request or set any timeouts
+ - nothing that will block the rendering process
+
+					|
+					v
+
+Render Child Components
+
+					|
+					v
+
+componentDidMount()
+- DO: Cause side-effects
+ - here you can make http requests
+- DONT: Update State (triggers re-render)
+ - dont update state here unless it's in a then block of a promise
+ - dont call set state in here synchronously
+ ----
+
+ 
