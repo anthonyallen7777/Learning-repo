@@ -342,7 +342,7 @@ react-scripts 2 and higher you must vv
 
 you can save the eject step and just
 
-import classes from './Person.modules.css';
+import classes from './Person.module.css';
 rename to Person.modules.css
 --------
 DEBUGGING
@@ -736,7 +736,7 @@ Application State(Data)
 
 Components vs Containers
 
-
+----
 
 
 
