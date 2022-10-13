@@ -409,7 +409,8 @@ const XY = prop => {...}
 X (NOT SUPPORTED YET) lifecycle hooks
 props.XY
 ----
-Component Lifecycle
+
+Component Lifecycle Methods or Component Lifecycle Hook
 - Only available in Class-based Components
 
 constructor()
@@ -424,25 +425,26 @@ render()
 
 (Lifecycle Hooks have nothing to do with React Hooks)
 
-CREATION
-Default ES6 class Feature - constructor(props)
- - Call super(props)
- - DO: Set up State
- - DONT: Cause side-effects
-  - by side-effect it means sending http request, storing something in local browser storage, or sending analytics to google
-  - this will impact performance and cause unnecessary re-renders
+Component Lifecycle - CREATION
+
+constructor(props)
+- Default ES6 class Feature
+- Call super(props)
+ - basically executes the contructor of the component you're extending (important so that everything get initialized correctly)
+- DO: Set up State
+- DONT: Cause Side-Effects
+ - by side-effect it means sending http request, storing something in local browser storage, or sending analytics to google
+ - this will impact performance and cause unnecessary re-renders
 
 					|
 					v
-
 getDerivedStateFromProps(props,state)
 - when ever your props change or class-based component you can sync your state to them
 - DO: Sync state
-- DONT: Cause side-effects
+- DONT: Cause Side-Effects
 
 					|
 					v
-
 render()
 - Prepare & Structure JSX code
 - DO: Layout JSX and render html code
@@ -452,18 +454,219 @@ render()
 
 					|
 					v
-
 Render Child Components
 
 					|
 					v
-
 componentDidMount()
-- DO: Cause side-effects
+- DO: Cause Side-Effects
  - here you can make http requests
 - DONT: Update State (triggers re-render)
  - dont update state here unless it's in a then block of a promise
  - dont call set state in here synchronously
- ----
+----
+Component Lifecycle - UPDATE
 
- 
+getDerivedStateFromProps(props,state)
+- used to initialize the state of a component that updates based on props you're getting
+- maybe some form control that gets external properties and want to interally handle user input
+- DO: Sync State to Props
+- DONT: Cause Side-Effects
+
+					|
+					v
+shouldComponentUpdate(nextProps, nextState)
+- May cancel updating process
+- DO: Decide whether to Continue or Not
+- DONT: Cause Side-Effects
+- For performance optimization
+- use carefully
+- does a shallow comparison
+ - as in for example arrays it compares the pointers not what the array is pointing to
+
+					|
+					v
+render()
+- Prepare & Structor JSX Code
+
+					|
+					v
+Update Child Component Props
+
+					|
+					v
+getSnapshotBeforeUpdate(prevProps, prevState)
+ - use to save some data before the update and use it in the update
+- DO: Last-minute DOM operations
+ - like getting the current scrolling position of user
+- DONT: Cause Side-Effects
+
+					|
+					v
+componentDidUpdate()
+- Most commonly used component
+- DO: Cause Side-Effects
+ - make http requests
+- DONT: Update State (triggers re-render)
+- don't update the state synchronously
+- careful not to get caught in infinite loop here (ex when making http request and updating component)
+----
+
+Most important hooks
+componentDidMount()
+- typically fetching data from a server
+componentDidUpdate()
+- typically fetching data from a server
+shouldComponentUpdate()
+- for performance improvements
+
+----
+
+useEffect
+- second most important next to useState
+- basically combines the functionality or the use cases of all class-based lifecycle hook in one react hook
+- not a lifecycle hook
+- this is a React hook so you can add it into components
+- can send http requests
+- runs when component is created as well
+takes a function that will run every render cycle
+
+
+cleanup work
+componentWillUnmount
+- code run right before component is removed
+
+useEffect cleanup
+- can be ran when the component get destroyed (empty argument [] , or on every update (no argument), or pass an array that list all the data to watch and only when that data changes does it run the function useEffect then run the cleanup function
+
+below we are cleaning up when the component is destroyed (an empyty array is passed)
+
+useEffect(() => {
+	console.log('[test.js useEffect');
+
+	//this function is run before the main useEffect function runs but after the (first) render cycle
+	return () => {
+		console.log('[test.js] cleanup work in useEffect')
+	}
+}, []);
+
+----
+
+React.memo();
+
+memoization
+- technique where React will store a snapshot of this component and only if its input changes, it will re-render it and otherwise if its input do not change react will give back the stored component
+- great way of getting optimization for functional components
+
+----
+
+PureComponent
+- just a normal component that already implements shouldComponentUpdate with a complete props check that check for any changes for any prop in that component
+
+----
+
+How React Updates the (Real) DOM (the DOM in the browser)
+
+render() is called
+- render is like a suggestion of what the HTML should look like in the end, it can show what is already displayed
+- this also applies to functional components and the JSX returned there, NOT just class-based components
+- use shouldComponentUpdate() to prevent unnecessary render calls
+
+Old Virtual DOM
+<div>...<div>
+- Faster than the "real" DOM
+- it's simply a DOM representation in Javascript
+
+Re-render Virtual DOM
+<div>...<div>
+- created when the render() method is called
+- render() doesn't immediately update the "real" DOM!
+
+It compares the old virtual DOM to the new one and checks if there are any differences
+- if there are differences it reaches to the real DOM and updates it and only changes the places where difference were detected
+- if no differences were found, then it doesn't touch the real DOM
+
+accessing the DOM is really slow, it's something you want to do as little as possible
+
+----
+
+adjacent jsx elements
+
+return [
+	<p key='i1'>Hello</p>,
+	<p key='i2'>I Am Adjacent</p>,
+	<input key='i3' type="text"/>
+];
+
+Auxillary components
+- used as a wrapper in cases where you want adjacentelements without extra DOM element being rendered
+- HOC (higher order component)
+
+aux.js
+const aux = props => props.children;
+export default aux;
+
+props.children
+- simply outputs whatever gets entered between the opening and closing tag this component
+
+React.Fragment
+- does the same thing as the Aux component
+
+----
+
+HOC
+- Higher Order Component
+- component that wraps other components that adds something to it (styling, additional HTML structure, or some logic)
+
+----
+
+passing unknown props
+
+return props => (
+    <div className={className}>
+        <WrappedComponent {...props} />
+    </div>
+);
+- the spread operator pull out all the properties that  are inside of this props object and distributes them as new key-value pairs on the wrapped component
+
+--------
+EXTRA STUFF
+
+VS Code multi-line comment
+Ctrl + / - will comment out all the lines with single line comments
+Alt + Shift + A - will comment out all the lines with mult-line comments
+
+Static methods
+- static methods are often utility functions, such as functions to create or clone objects, whereas static properties are useful for caches, fixed-configuration, or any other data you don't need to be replicated across instances.
+
+class Car {
+	constructor(name) {
+		this.name = name;
+	}
+	static hello() {
+		return "Hello!!";
+	}
+}
+
+let myCar = new Car("Ford");
+
+// You can call 'hello()' on the Car Class:
+document.getElementById("demo").innerHTML = Car.hello();
+
+// But NOT on a Car Object:
+// document.getElementById("demo").innerHTML = myCar.hello();
+// this will raise an error. 
+----
+class Car {
+  constructor(name) {
+    this.name = name;
+  }
+  static hello(x) {
+    return "Hello " + x.name;
+  }
+}
+let myCar = new Car("Ford");
+document.getElementById("demo").innerHTML = Car.hello(myCar); 
+
+----
+
