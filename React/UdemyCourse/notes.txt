@@ -285,3 +285,31 @@ map operation - use on arrays to map objects or strings, etc into array of jsx e
 add key to let react efficient update
 --------
 styling
+
+Radium package
+- lets us use inline styles with pseudo selectors and media queries
+- wrap entire app in root component with StyleRoot so you can access radium functionality
+
+export default Radium(App);
+- this called a higher order component
+- it's just a component wrapping another component adding extra functionality
+
+Media queries can be used to check many things, such as:
+- width and height of the viewport
+- width and height of the device
+- orientation (is the tablet/phone in landscape or portrait mode?)
+- resolution
+
+Styled components library
+- making styled components very simple
+
+backticks templates
+- vanilla javascript feature
+- used to define template literals
+	- template literals are used to make strings easier
+	- can interpolate any kind of expression in the template literal
+	- can be multi-line
+
+const Button = styled.button``
+- function call that takes what text you pass it as styling for the button
+--------
