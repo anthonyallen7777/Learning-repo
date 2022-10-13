@@ -629,6 +629,34 @@ return props => (
 );
 - the spread operator pull out all the properties that  are inside of this props object and distributes them as new key-value pairs on the wrapped component
 
+----
+SUPER IMPORTANT STUFF RIGHT HERE
+setting state correctly
+
+setState does not immediately trigger an update of the state of the component in a re-render cycle, instead it is scheduled by React and React will perform the state update and re-render when it has the resources
+
+this.setState((prevState, props) => {
+  return {
+    persons: persons,
+    changeCounter: prevState.changeCounter + 1
+  };
+});
+
+----
+propTypes
+
+npm install --save prop-types
+
+Person.propTypes = {
+    click: PropTypes.func,
+    name: PropTypes.string,
+    age: PropTypes.number,
+    changed: PropTypes.func
+};
+- special javascript property that can be added to any javascript component object that React will watch out for in dev mode and give a warning if you pass in incorrect props
+
+this is especially helpful when you distribute components as a package to other devs or when working with a team
+
 --------
 EXTRA STUFF
 
