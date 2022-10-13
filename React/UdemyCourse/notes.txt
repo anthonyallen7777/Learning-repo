@@ -656,6 +656,134 @@ Person.propTypes = {
 - special javascript property that can be added to any javascript component object that React will watch out for in dev mode and give a warning if you pass in incorrect props
 
 this is especially helpful when you distribute components as a package to other devs or when working with a team
+----
+using refs in class-based components
+(references)
+
+ref
+- just like key is a special property that is understood by React
+
+
+1st approach
+componentDidMount() {
+    this.inputElement.focus();
+}
+
+<input
+ref={(inputEl) => {this.inputElement = inputEl}}
+/>
+- this gives you a reference to the element you've placed it on
+
+2nd approach (more modern approach)
+constructor() {
+	this.inputElementRef = React.createRef();
+}
+
+componentDidMount() {
+    this.inputElementRef.current.focus();
+}
+
+<input
+ref={(inputEl) => {this.inputElement = inputEl}}
+/>
+----
+understand problems with prop chains
+
+Context
+- helps handle cases where you need certain data in multiple components and you dont want to pass that state across multiple layers
+- object, array, string, or number that can be passed between React components without using props
+
+contextType
+
+auth-context.js
+const authContext = React.createContext({
+    authenticated: false,
+    login: () => {}
+});
+
+app.js
+<AuthContext.Provider value={{
+	authenticated: this.state.authenticated,
+	login: this.loginHandler
+}}>
+
+CONTEXTTYPE
+
+import AuthContext from '../../../context/auth-context';
+
+static contextType = AuthContext;
+
+console.log(this.context.authenticated);
+
+OR
+
+USECONTEXT
+
+import React, { useContext } from "react";
+
+const authContext = useContext(AuthContext);
+
+console.log(authContext.authenticated);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 --------
 EXTRA STUFF
@@ -663,6 +791,9 @@ EXTRA STUFF
 VS Code multi-line comment
 Ctrl + / - will comment out all the lines with single line comments
 Alt + Shift + A - will comment out all the lines with mult-line comments
+
+Static property
+- it can be accessed from outside without the need to instantiate an object based on this class first
 
 Static methods
 - static methods are often utility functions, such as functions to create or clone objects, whereas static properties are useful for caches, fixed-configuration, or any other data you don't need to be replicated across instances.
