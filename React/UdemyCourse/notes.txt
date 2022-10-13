@@ -300,6 +300,8 @@ Media queries can be used to check many things, such as:
 - orientation (is the tablet/phone in landscape or portrait mode?)
 - resolution
 
+----
+
 Styled components library
 - making styled components very simple
 
@@ -312,4 +314,9 @@ backticks templates
 
 const Button = styled.button``
 - function call that takes what text you pass it as styling for the button
+
+----
+
+npm run eject
+- will eject from the under the hood configuration where you dont have access to the underlying web packed confile file, etc and gives you access
 --------
