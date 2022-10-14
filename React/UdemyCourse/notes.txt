@@ -765,11 +765,15 @@ reduce((arr, el) => {
 
 transform an array into something else
 
+----
 
+// Must be in this format to reference this.setState({});
 
+func = () => {
+	this.setState({});
+} 
 
-
-
+----
 
 
 
