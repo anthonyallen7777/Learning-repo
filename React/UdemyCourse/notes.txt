@@ -876,7 +876,27 @@ axios.interceptors.response.use(response => {
   return Promise.reject(error);
 })
 
+----
 
+setting a default global configuration for axios
+
+axios.defaults.baseURL = 'https://jsonplaceholder.typicode.com';
+axios.defaults.headers.common['Authorization'] = 'AUTH TOKEN';
+axios.defaults.headers.post['Context-Type'] = 'application/json';
+
+axios instances
+- give you flexibility
+- allows you to control in detail which part of your app you want to use which default settings
+ 
+root axios.js
+const instance = axios.create({
+    baseURL: 'https://jsonplaceholder.typicode.com',
+});
+
+instance.defaults.headers.common['Authorization'] = 'AUTH TOKEN FROM INSTANCE';
+
+blog.js
+import axios from '../../axios';
 
 
 http requests in Multi-page application in React
