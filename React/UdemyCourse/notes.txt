@@ -779,6 +779,66 @@ z-index
 - the higher the value the closer it is to the you
 - the lower the value the further away it is from the you
 
+----
+
+Mobile first way
+- base classes are for mobile devices then add media queries to make it look good on bigger devices
+
+----
+
+<Modal>
+	<OrderSummary/>
+</Modal>
+
+- The wrapping element (Modal) controls the updating of the wrapped element (OrderSummary)
+
+--------
+
+HTTP
+
+----
+
+Ajax
+
+react
+- library for front-end
+- the code running in the browser
+
+http requests in React (typically)
+- decoupling
+- there is a strong differentiation between your frontend, react app, and you backend, server
+
+S E R V E R 
+|	^	|
+X	| (JSON Data)
+|	|	|
+v	|	v
+REACT  APP
+
+Server is typically a RESTful API
+- just exposing some API endpoints to which you can send requests to get or send data from your standalone react app
+
+Two way to send Ajax request
+- XML HTTP request (XMLHttpRequest)
+ - you can use this to construct your own Ajax request and send them to a specific url and handle the response
+- Axios
+ - a third party javascript library
+ - can be used in any javascript code
+
+componentDidMount()
+- this where we should fetch data (HTTP requests)
+- but NOT for updating state (because it triggers a re-render)
+
+.then();
+- takes a function a input and the function is executed when the promise resolves (once the data from backend is here)
+
+
+real app you could send some query parameter to backend to restrict the amount of data you want
+ - pagination (basically)
+
+
+() => this.postSelectedHandler(post.id)
+- reason to use this to to be able to pass an argument to the function
 
 
 
@@ -792,25 +852,10 @@ z-index
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+http requests in Multi-page application in React
+- a page submits a form
+- that sends a request to the backend (with potentially new react code)
+- you get back new html page with (potentially new react code)
 
 
 

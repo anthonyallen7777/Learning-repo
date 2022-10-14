@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import classes from './App.module.css';
-import Layout from './components/Layout/Layout';
+import Layout from './containers/Layout/Layout';
 import BurderBuilder from './containers/BurgerBuilder/BurgerBuilder';
 
 class App extends Component {
