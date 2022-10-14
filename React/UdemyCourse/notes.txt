@@ -738,13 +738,32 @@ Components vs Containers
 
 ----
 
+class componentName extends Component {
+	
+}
+
+^^^^ we can still use this as functional (dumb) component if we omit the state. It doesn't just become a stateful component just because we use class instead of a function form
+
+inside a class you access props with this.props
+
+font-size: 1.2rem; //scales the font-size based on the font-size the user selected
+
+{salad: 1, bacon: 1, cheese: 2, meat: 2}
+					|
+					|
+					v
+	['salad', 'bacon', 'cheese', 'meat']
+					|
+					|
+					v
+[['salad', 1], ['bacon', 1], ['cheese', 2], ['meat', 2]]
 
 
+reduce((arr, el) => {
+	return arr.concat(el) // [] + [] = []
+}, []);
 
-
-
-
-
+transform an array into something else
 
 
 
