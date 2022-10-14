@@ -775,7 +775,9 @@ func = () => {
 
 ----
 
-
+z-index
+- the higher the value the closer it is to the you
+- the lower the value the further away it is from the you
 
 
 
