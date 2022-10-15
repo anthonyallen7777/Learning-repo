@@ -944,10 +944,6 @@ const withErrorHandler = (WrappedComponent, axios) => {
     };
 };
 
-----
-
-Routing
-
 //prevent memory leaks by ejecting interceptors
 //because this component will be run on multiple other components (it's a HOC component)
 //we need to make sure it doesn't create lots of interceptors that sit around in memory
@@ -956,6 +952,34 @@ componentWillUnmount() {
     axios.interceptors.request.eject(this.requestInterceptor);
     axios.interceptors.response.eject(this.responseInterceptor);
 }
+
+--------
+
+ROUTING
+- Routing is about being able to show different pages to the user
+- routing is about parsing paths, so the path after our domain and showing the appropriate JSX or component code
+- load conditional JSX or component code for different paths
+- use a router package so we dont have to determine which path the user is on on our own
+
+					Single Page
+					(HTML File)
+
+/ 		/blog		/blog/post/1	/users	/account	orders
+		(Not real Files but re-rendered Single Page!)
+
+					Router Package
+Parses URL /Path -> Read Config -> Render / Load appropriate JSX / Component
+
+- we don't actually have different files but we just re-render part of the single page or the entire page depending on which path the user navigated to
+
+react-router
+react-router-dom
+- defacto standard packages for routing in React
+
+As long as you're user is navigating around you rarely want to reload, you want to just re-render the page in the parts where it needs to be rendered so it looks a reload
+- this is super IMPORTANT because not reloading when navigating routes makes it so our state is saved
+
+
 
 
 
