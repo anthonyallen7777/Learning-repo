@@ -1,14 +1,24 @@
 import React, { Component } from 'react';
 import classes from './App.module.css';
 import Layout from './containers/Layout/Layout';
-import BurderBuilder from './containers/BurgerBuilder/BurgerBuilder';
+import BurgerBuilder from './containers/BurgerBuilder/BurgerBuilder';
 
 class App extends Component {
+  // state = {
+  //   show: true
+  // };
+
+  // componentDidMount() {
+  //   setTimeout(() => {
+  //     this.setState({show: false});
+  //   }, 5000);
+  // }
+  
   render() {
     return (
       <div className={classes.App}>
         <Layout>
-          <BurderBuilder />
+          <BurgerBuilder />
         </Layout>
       </div>
     );
