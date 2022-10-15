@@ -904,6 +904,86 @@ http requests in Multi-page application in React
 - that sends a request to the backend (with potentially new react code)
 - you get back new html page with (potentially new react code)
 
+--------
+
+FIREBASE
+
+----
+database
+
+using realtime database
+- we wont connect directly to the database we just send http request and firebase does the mapping of the http endpoints to the database
+
+ONLY IN THE DEV ENVIRONMENT SHOULD THE READ AND WRITE RULES BE SET TO TRUE
+
+
+Firebase POST
+axios.post('/orders.json');
+- when posting each list item gets a unique ID assigned by firebase automatically
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
