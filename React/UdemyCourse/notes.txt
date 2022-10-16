@@ -1,6 +1,18 @@
-javascript refresher
+React - client-side javascript library
+
+why react?
+- ui state becomes difficult to manage with vanilla js
+- active community
 
 --------
+
+javascript refresher
+VARIABLES
+
+let -variable that is variable
+const - something that is assigned once and never changed
+
+----
 EXPORT & IMPORT
 
 const person = {
@@ -979,6 +991,11 @@ react-router-dom
 As long as you're user is navigating around you rarely want to reload, you want to just re-render the page in the parts where it needs to be rendered so it looks a reload
 - this is super IMPORTANT because not reloading when navigating routes makes it so our state is saved
 
+absolute path
+- an absolute path is always appended to your domain
+
+relative path
+- 
 
 
 
