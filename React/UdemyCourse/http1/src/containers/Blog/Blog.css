@@ -17,6 +17,7 @@
 }
 
 .Blog a:hover,
-.Blog a:active {
+.Blog a:active,
+.Blog a.active {
     color: rgb(226, 113, 38);
 }
