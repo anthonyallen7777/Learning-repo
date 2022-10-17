@@ -998,35 +998,101 @@ relative path
 - 
 
 
+Passing parameters
+
+<Link
+to={'/' + post.id}
+key={post.id}>
+    <Post
+    title={post.title}
+    author={post.author}
+    clicked={() => this.postSelectedHandler(post.id)} />
+</Link> );
+
+<Route path="/:id" exact element={<FullPost />} />
 
 
+<Switch> is pretty much <Routes> in react-router-dom v6
+
+----
+
+Navigation guard
+- typical used when you dont know if a user is authenticated or not and there are some routes in your app you only want to allow the user to visit if they are authenticated
+
+----
+404
+
+<Route path="*" element={<h1>Not Found.</h1>} />
+- always last
+
+----
+
+lazy-loading OR code-splitting
+- technique of downloading only what you need
+- only load component once you need it
+- depends heavily on the webpack configuration
 
 
+hoc/asyncComponent.js
+import React, { Component } from "react";
+
+const asyncComponent = (importComponent) => {
+    return class extends Component {
+        state = {
+            component: null
+        }
+
+        componentDidMount() {
+            importComponent()
+            .then(cmp => {
+                this.setState({component: cmp.default});
+            });
+        }
+
+        render () {
+            const C = this.state.component;
+
+            return C ? <C {...this.props} /> : null;
+        }
+    }
+}
+
+export default asyncComponent;
+
+blog.js
+import asyncComponent from '../../hoc/asyncComponent';
+
+const AsyncNewPost = asyncComponent(() => {
+    return import('./NewPost/NewPost');
+});
+
+<AsyncNewPost />
+
+new lazy-loading
+
+import { Suspense } from 'react';
+
+const Post = React.lazy(() => import('./NewPost/NewPost'));
+
+<Suspense fallback={<div>Loading...</div>}><NewPost /></Suspense>
+
+----
+
+routing & the server (deployment)
+
+User -------> Server 			React App
+		  (handles requests	  (knows the routes!)
+			first!)
+			(404 Error) ----> (always load index.html!)
+		(example.com/my-app)  (Set base path!)
 
 
+- configure the sever in a way that it always forwards request no matter if it understands them or not
+- always load index.html even unknown request. this allows react to take over and parse the request against the routes it knows
 
+<BrowserRouter basename="/my-app">
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+--------
 
 
 

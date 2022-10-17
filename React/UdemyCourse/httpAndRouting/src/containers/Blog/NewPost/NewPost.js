@@ -1,16 +1,22 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
+import { Navigate } from 'react-router-dom';
+
+import withRouter from '../../../hoc/withRouter';
+
 import './NewPost.css';
 
 class NewPost extends Component {
     state = {
         title: '',
         content: '',
-        author: 'Joe'
+        author: 'Joe',
+        submitted: false
     }
 
     componentDidMount() {
+        //console.log(this.props.auth);
         //console.log(this.props);
     }
 
@@ -23,12 +29,19 @@ class NewPost extends Component {
         axios.post('/posts', data)
         .then(res => {
             console.log(res);
+            this.props.router.navigate('/posts/');
+            // this.setState({submitted: true});
         });
     }
 
     render () {
+        let redirect = null;
+        if (this.state.submitted) {
+            redirect = <Navigate to="/posts/" replace="true"></Navigate>;
+        }
         return (
             <div className="NewPost">
+                {redirect}
                 <h1>Add a Post</h1>
                 <label>Title</label>
                 <input type="text" value={this.state.title} onChange={(event) => this.setState({title: event.target.value})} />
@@ -45,4 +58,4 @@ class NewPost extends Component {
     }
 }
 
-export default NewPost;
+export default withRouter(NewPost);
