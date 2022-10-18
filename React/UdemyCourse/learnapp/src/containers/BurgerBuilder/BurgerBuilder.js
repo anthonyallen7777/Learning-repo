@@ -12,7 +12,10 @@ import Spinner from '../../components/UI/Spinner/Spinner';
 import BuildControls from '../../components/Burger/BuildControls/BuildControls';
 import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary';
 
+
+// hoc
 import withErrorHandler from "../../hoc/withErrorHandler/withErrorHandler";
+import withRouter from "../../hoc/withRouter";
 
 const INGREDIENT_PRICES = {
     salad: 0.5,
@@ -46,6 +49,7 @@ class BurgerBuilder extends Component {
         .catch(err => {
             this.setState({error: true});
         });
+        // console.log(this.props.router)
     }
 
     addIngredientHandler = (type) => {
@@ -112,33 +116,34 @@ class BurgerBuilder extends Component {
     }
 
     purchaseContinueHandler = () => {
-        this.setState({loading: true});
-        // alert("YOU CONTINUE!");
-        const order = {
-            ingredients: this.state.ingredients,
-            price: this.state.totalPrice,
-            customer: {
-                name: 'Joe Yellen',
-                address: {
-                    street: 'Testing 12345',
-                    zipCode: '54321',
-                    country: 'Spain',
-                },
-                email: 'testing@testing.com'
-            },
-            deliveryMethod: 'moderate'
-        }
+        // this.setState({loading: true});
+        // // alert("YOU CONTINUE!");
+        // const order = {
+        //     ingredients: this.state.ingredients,
+        //     price: this.state.totalPrice,
+        //     customer: {
+        //         name: 'Joe Yellen',
+        //         address: {
+        //             street: 'Testing 12345',
+        //             zipCode: '54321',
+        //             country: 'Spain',
+        //         },
+        //         email: 'testing@testing.com'
+        //     },
+        //     deliveryMethod: 'moderate'
+        // }
 
-        axios.post('/orders.json', order)
-        .then(res => {
-            console.log(res);
-            this.setState({loading: false, purchaseMode: false});
+        // axios.post('/orders.json', order)
+        // .then(res => {
+        //     console.log(res);
+        //     this.setState({loading: false, purchaseMode: false});
 
-        })
-        .catch(err => {
-            console.log(err);
-            this.setState({loading: false, purchaseMode: false});
-        });
+        // })
+        // .catch(err => {
+        //     console.log(err);
+        //     this.setState({loading: false, purchaseMode: false});
+        // });
+        this.props.router.navigate("/checkout");
     }
 
 
@@ -199,4 +204,4 @@ class BurgerBuilder extends Component {
     }
 }
 
-export default withErrorHandler(BurgerBuilder, axios);
+export default withRouter(withErrorHandler(BurgerBuilder, axios));

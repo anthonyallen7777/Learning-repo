@@ -3,6 +3,10 @@ import classes from './App.module.css';
 import Layout from './containers/Layout/Layout';
 import BurgerBuilder from './containers/BurgerBuilder/BurgerBuilder';
 
+import { Routes, Route } from 'react-router';
+
+import Checkout from './containers/Checkout/Checkout';
+
 class App extends Component {
   // state = {
   //   show: true
@@ -18,7 +22,10 @@ class App extends Component {
     return (
       <div className={classes.App}>
         <Layout>
-          <BurgerBuilder />
+          <Routes>
+            <Route path="/checkout" element={<Checkout />}/>
+            <Route path="/" exact element={<BurgerBuilder />}/>
+          </Routes>
         </Layout>
       </div>
     );
