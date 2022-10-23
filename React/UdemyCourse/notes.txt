@@ -1094,24 +1094,51 @@ User -------> Server 			React App
 
 --------
 
+Redux
+- standalone third party library
+- exists to make state management easier
+
+What is State?
+- is user authenticate?
+- is a modal open? is a backdrop open?
+- it's less about data, it's more about pure UI only state
+- state influences what you see on screen
+
+redux
+- gives a certain flow of data, certain way of managing data so that we can nicely integrate with another package into the react app so that react does react to changes of data
+
+	|--------------> Reducers (receive action,update State)
+	|					|
+	|				 Updates
+	|					v
+  Action		   Central Store
+	^			  (stores entire
+Dispatches		  application state)
+	|
+	|
+Component
+(wants to
+manipulate
+state)
 
 
 
 
+central store
+- stores the entire application state
+- kinda like a giant javascript object
 
+Action
+- pre-defined information package (possibly with payload)
+- examples.. (addIngredient, removeIngredient)
+- an information packaged we're sending to redux
+- doesn't directly reach the store, doesn't hold any logic, doesn't know how to update the store (it's just a messenger)
 
-
-
-
-
-
-
-
-
-
-
-
-
+Reducer
+- Receive action and old State as input and then spits out updated State (pure, sync functions, no side-effects!)
+- can combine multiple reducers
+- checks to type of the action (ex. addIngredient) , define the code for that type of action in reducer
+- has to execute synchronous code only (no async code, no side-effects, no HTTP requests)
 
 
 
