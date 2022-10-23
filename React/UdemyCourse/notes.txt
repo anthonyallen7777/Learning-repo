@@ -1107,16 +1107,16 @@ What is State?
 redux
 - gives a certain flow of data, certain way of managing data so that we can nicely integrate with another package into the react app so that react does react to changes of data
 
-	|--------------> Reducers (receive action,update State)
+	---------------> Reducers (receive action,update State)
 	|					|
 	|				 Updates
 	|					v
-  Action		   Central Store
-	^			  (stores entire
-Dispatches		  application state)
-	|
-	|
-Component
+  Action		   Central Store ------------Triggers-----
+	^			  (stores entire                 		 |
+Dispatches		  application state)             		 v
+	|										(Automatic) Subscription
+	|													 |
+Component <---------Passes updated State as Props---------
 (wants to
 manipulate
 state)
@@ -1139,10 +1139,11 @@ Reducer
 - can combine multiple reducers
 - checks to type of the action (ex. addIngredient) , define the code for that type of action in reducer
 - has to execute synchronous code only (no async code, no side-effects, no HTTP requests)
+- Updating has to be done in an immutable way (must always return a new State) which can be based on the old one but mut technically be a new javascript object
 
-
-
-
+Subscription
+- The store triggers all subscriptions whenever the state changes, whenever the state is updated in the store
+- component can subscribe to store updates, it then receives that update automatically
 
 
 
