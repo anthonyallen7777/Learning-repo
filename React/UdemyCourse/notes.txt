@@ -1140,14 +1140,27 @@ Reducer
 - checks to type of the action (ex. addIngredient) , define the code for that type of action in reducer
 - has to execute synchronous code only (no async code, no side-effects, no HTTP requests)
 - Updating has to be done in an immutable way (must always return a new State) which can be based on the old one but mut technically be a new javascript object
+- Only thing that updates the state
 
 Subscription
+- takes an argument, a function that will be executed whenever the state is updated, so whenever an action reaches the reducer
 - The store triggers all subscriptions whenever the state changes, whenever the state is updated in the store
 - component can subscribe to store updates, it then receives that update automatically
+- subscriptons make sure you don't have to manually call getState if you want to get the current state, inform you went you want to get a new state because something changed
+
+--------
+
+npm install @reduxjs/toolkit react-redux
+OLD npm install redux react-redux
+
+node.js import
+const redux = require('redux');
 
 
 
-
+es6 default value in function
+const initialState = 1
+const rootReducer = (state = initialState, action) => {};
 
 
 
