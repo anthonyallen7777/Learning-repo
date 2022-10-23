@@ -23,42 +23,72 @@ var shallowCopy = deepArray.slice(0);
 
 var deepCopy = JSON.parse(JSON.stringify(deepArray))
 deepCopy[0].push("playlist");;
-console.log(deepArray[0], deepCopy[0]);
+//console.log(deepArray[0], deepCopy[0]);
 
 
 //OBJECTS
 
-const person = {
+// const person = {
+//     firstName: 'John',
+//     lastName: 'Doe'
+// };
+// 
+// //Both spread and assign are SHALLOW copying
+// //while JSON is DEEP copying
+// 
+// // using spread ...
+// let p1 = {
+//     ...person
+// };
+// 
+// // using  Object.assign() method
+// let p2 = Object.assign({}, person);
+// 
+// // using JSON
+// let p3 = JSON.parse(JSON.stringify(person));
+
+
+// let person = {
+//     firstName: 'John', //primitive value
+//     lastName: 'Doe', //primitive value
+//     address: { //reference value b/c it's an object
+//         street: 'North 1st street',
+//         city: 'San Jose',
+//         state: 'CA',
+//         country: 'USA'
+//     }
+// };
+// 
+// console.log(person);
+// 
+// let copiedPerson = Object.assign({}, person);
+// 
+// copiedPerson.firstName = 'Jane'; // disconnected
+// 
+// copiedPerson.address.street = 'Amphitheatre Parkway'; // connected
+// copiedPerson.address.city = 'Mountain View'; // connected
+// 
+// console.log(copiedPerson);
+// 
+// console.log(person);
+
+let person = {
     firstName: 'John',
-    lastName: 'Doe'
+    lastName: 'Doe',
+    address: {
+        street: 'North 1st street',
+        city: 'San Jose',
+        state: 'CA',
+        country: 'USA'
+    }
 };
 
-//Both spread and assign are SHALLOW copying
-//while JSON is DEEP copying
 
-// using spread ...
-let p1 = {
-    ...person
-};
+let copiedPerson = JSON.parse(JSON.stringify(person));
 
-// using  Object.assign() method
-let p2 = Object.assign({}, person);
+copiedPerson.firstName = 'Jane'; // disconnected
 
-// using JSON
-let p3 = JSON.parse(JSON.stringify(person));
+copiedPerson.address.street = 'Amphitheatre Parkway';
+copiedPerson.address.city = 'Mountain View';
 
-
-//shallow copying objects
-var obj = {type: ["BLUE"]};
-var copy = obj
-copy.key3 = "abc";
-
-//console.log(obj, copy);
-
-
-//DEEP copying objects
-var obj2 = {type: ["BLUE"]};
-var copy2 = {...obj2};
-copy2.key3 = "abc";
-
-//console.log(obj2, copy2);
+console.log(person);

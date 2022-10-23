@@ -1153,14 +1153,53 @@ Subscription
 npm install @reduxjs/toolkit react-redux
 OLD npm install redux react-redux
 
+----
+
 node.js import
 const redux = require('redux');
 
-
+----
 
 es6 default value in function
 const initialState = 1
 const rootReducer = (state = initialState, action) => {};
+
+----
+
+if your container only needs to dispatch actions but doesnt need a slice of the State just pass null
+export default connect(null, mapDispatchToProps)(Counter);
+
+----
+
+immutable way of changing arrays
+
+const initialState = {
+    counter: 0,
+    results: [],
+}
+
+return {
+	...state,
+	results: state.results.concat({value: state.counter})
+}
+
+----
+
+					  	Types of State
+		Type				Example						 Use Redux?
+ Local UI State 	 	Show/Hide Backdrop    		Mostly handled within
+ 													components
+
+ Persistent State 		All Users, all Posts, ...   Stored on Server, relevant
+ 													slice managed by Redux
+ 													
+Client State 			Is Authenticated? Filters	Managed via Redux
+						set by User, ...
+
+
+
+
+
 
 
 
