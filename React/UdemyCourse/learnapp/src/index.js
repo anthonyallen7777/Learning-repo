@@ -8,9 +8,15 @@ import { BrowserRouter } from 'react-router-dom';
 //redux
 import { configureStore, combineReducers } from '@reduxjs/toolkit';
 import { Provider } from 'react-redux';
-import reducer from './store/reducer';
+import burgerBuilderReducer from './store/reducers/burgerBuilder';
+import orderReducer from './store/reducers/order';
 
-const store = configureStore({reducer: reducer});
+const rootReducer = combineReducers({
+    burgerBuilder: burgerBuilderReducer,
+    order: orderReducer
+})
+
+const store = configureStore({reducer: rootReducer});
 
 const app = (
     <Provider store={store}>

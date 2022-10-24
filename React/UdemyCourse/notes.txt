@@ -1318,6 +1318,7 @@ Where to put Logic?
 
 - there can be reasons for putting the logic in either but you can justifiably put the logic in the reducer and not much logic into the action creator
 - just be consistent about it
+- you could also do data FORMAT changes in the action creators
 
 ----
 
@@ -1333,11 +1334,13 @@ export const updateObject = (oldObject, updatedValues) => {
 
 case actionTypes.ADD: return updateObject(state, {counter: state.counter + action.payload.val})
 
-----
+--------
 
+Authentication
 
-
-
+- single page and multi-page application authentication are handled differently
+- multi-page authentication is handled by having a session on the server and returning different pages after checking the validity of the user or the authentication status on the server
+- using react you can check the authentication status of the user on the server but on on every request
 
 
 
