@@ -1150,8 +1150,8 @@ Subscription
 
 --------
 
-npm install @reduxjs/toolkit react-redux
-OLD npm install redux react-redux
+npm i @reduxjs/toolkit react-redux
+OLD npm i redux react-redux
 
 ----
 
@@ -1192,13 +1192,23 @@ return {
 
  Persistent State 		All Users, all Posts, ...   Stored on Server, relevant
  													slice managed by Redux
- 													
+
 Client State 			Is Authenticated? Filters	Managed via Redux
 						set by User, ...
 
+----
 
+es6 dynamically override a property in a given javascript object
 
+return {
+	...state,
+	ingredients: {
+		...state.ingredients,
+		[action.ingredientName]: state.ingredients[action.ingredientName] + 1
+	}
+}
 
+----
 
 
 
