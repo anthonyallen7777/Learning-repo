@@ -6,7 +6,7 @@ const initialState = {
 }
 
 const deleteResult = (state, action) => {
-    const updatedArray = state.results.filter(result => { //returns new array
+    const updatedArray = state.results.filter(result => { // returns new array
         return result.id !== action.resultElementId
     });
     return updateObject(state, {result: updatedArray});
