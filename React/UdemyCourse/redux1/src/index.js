@@ -27,7 +27,7 @@ const logger = store => {
 
 const store = configureStore({
     reducer: rootReducer,
-    middleware: [logger],
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
 });
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

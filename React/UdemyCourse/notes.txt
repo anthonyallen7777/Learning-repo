@@ -1271,29 +1271,69 @@ NEW WAY
 Action creators
 - just a function that returns an action or which creates an action
 
+----
 
+Redux-funk library
+- adds a middleware to app that allows action creators to not return the action itself but return a function that will dispatch an action
+- this allows for asynchronous code
 
+if using Redux Toolkit thunk is included by default
 
+const store = configureStore({
+    reducer: rootReducer,
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
+});
 
+if using basic Redux store
+npm i redux-thunk
 
+- only synchronous actions may edit the store
 
+----
 
+mass export from one index file
 
+index.js
+export {
+    add,
+    subtract,
+    increment,
+    decrement
+} from './counter';
 
+export {
+    store_result,
+    delete_result
+} from './result';
 
+----
 
+Where to put Logic?
 
+		Action Creators							Reducer
+	  Can run Async code 				  Pure, Sync code only!
 
+	  Shouldn't prepare the State 		Core Redux Concept Reducer
+	  Update too much					update the state
 
+- there can be reasons for putting the logic in either but you can justifiably put the logic in the reducer and not much logic into the action creator
+- just be consistent about it
 
+----
 
+Advanced reducers
 
+utility.js
+export const updateObject = (oldObject, updatedValues) => {
+    return {
+        ...oldObject,
+        ...updatedValues
+    }
+};
 
+case actionTypes.ADD: return updateObject(state, {counter: state.counter + action.payload.val})
 
-
-
-
-
+----
 
 
 
