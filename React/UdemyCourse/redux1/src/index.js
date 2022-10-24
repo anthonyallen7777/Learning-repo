@@ -14,7 +14,21 @@ const rootReducer = combineReducers({
     res: resultReducer
 });
 
-const store = configureStore({reducer: rootReducer});
+const logger = store => {
+    return next => {
+        return action => {
+            console.log('[Middleware] Dispatching', action);
+            const result = next(action);
+            console.log('[Middleware] next state', store.getState());
+            return result;
+        }
+    }
+}
+
+const store = configureStore({
+    reducer: rootReducer,
+    middleware: [logger],
+});
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

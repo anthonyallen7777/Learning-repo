@@ -1208,7 +1208,401 @@ return {
 	}
 }
 
+--------
+
+Advanced Redux
+
+Middleware
+- basically functions (code in general) you hook into a process which then gets executed as part of that process without stopping it
+- can do something with an action before it reaches the reducer (can be as simply logging something) (code we want to run between the action and reducer)
+- becomes important when you want to execute asynchronous code
+
+
+	--Middleware---> Reducers (receive action,update State)
+	|					|
+	|				 Updates
+	|					v
+  Action		   Central Store ------------Triggers-----
+	^			  (stores entire                 		 |
+Dispatches		  application state)             		 v
+	|										(Automatic) Subscription
+	|													 |
+Component <---------Passes updated State as Props---------
+(wants to
+manipulate
+state)
+
+
+simple logger middleware
+
+import { configureStore } from '@reduxjs/toolkit';
+
+const logger = store => {
+    return next => {
+        return action => {
+            console.log('[Middleware] Dispatching', action);
+            const result = next(action);
+            console.log('[Middleware] next state', store.getState());
+            return result;
+        }
+    }
+}
+
+const store = configureStore({
+    reducer: rootReducer, 
+    middleware: [logger]
+});
+
+Another way is to add to default middleware
+const store = configureStore({
+  reducer: rootReducer,
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
+});
+
 ----
+
+Redux devtool
+
+NEW WAY
+- just install extension
+
+----
+
+Action creators
+- just a function that returns an action or which creates an action
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
