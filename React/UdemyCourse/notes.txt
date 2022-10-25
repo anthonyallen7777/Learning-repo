@@ -1368,7 +1368,9 @@ Token
 
 ----
 
+how to create token on server?
 
+----
 
 
 
