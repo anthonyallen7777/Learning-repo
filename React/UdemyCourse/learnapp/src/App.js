@@ -8,6 +8,9 @@ import BurgerBuilder from './containers/BurgerBuilder/BurgerBuilder';
 import Checkout from './containers/Checkout/Checkout';
 import Orders from './containers/Orders/Orders';
 
+//Auth
+import Auth from './containers/Auth/Auth';
+
 class App extends Component {
   // state = {
   //   show: true
@@ -26,6 +29,7 @@ class App extends Component {
           <Routes>
             <Route path="/checkout/*" element={<Checkout />}/>
             <Route path="/orders" element={<Orders />} />
+            <Route path="/auth" element={<Auth />} />
             <Route path="/" exact element={<BurgerBuilder />}/>
           </Routes>
         </Layout>
