@@ -1342,13 +1342,31 @@ Authentication
 - multi-page authentication is handled by having a session on the server and returning different pages after checking the validity of the user or the authentication status on the server
 - using react you can check the authentication status of the user on the server but on on every request
 
+(SPA = Single Page Application)
 
+How Authenticattion Works
 
+(request to
+protected
+resource)
+	--------->Server (Stateless, RESTful API)
+	|		  ^   | 
+	|  (Auth) |   |(S̶e̶s̶s̶i̶o̶n̶)
+	|   	  |   |
+ (Token)   	  |	  |(Token)
+	|   	  |   |     \
+	|   	  |   |      \ Store
+	|		  |   v       \
+	----------S P A------localStorage
 
+Token
+- javascript object (encoded as JSON)
+- stored in localStorage (allows the user to fetch the token even if the user leaves and revisits the page)
+- pass the token along with request to protected resources
+- Only the tokens sent by the server are accepted on the server
+- you can't create a token on the client and send to the server
 
-
-
-
+----
 
 
 
