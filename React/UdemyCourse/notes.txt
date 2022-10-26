@@ -1372,13 +1372,21 @@ how to create token on server?
 
 ----
 
+localStorage
+- browser API
 
+----
 
+Security
 
+localStorage can be accessed with cross-site scripting attacks and cross-site scripting are prevented by React, you can't output insecure code by default
 
+Be careful and protect the Refresh token if it is to be used in app
 
+route protection on the frontend with guards is important
 
-
+the server should not return any data for unauthenticated users (this how you protect your data)
+the frontend is only about providing a user experience and to prevent to user from accidentally visiting a page they shouldn't be able to
 
 
 

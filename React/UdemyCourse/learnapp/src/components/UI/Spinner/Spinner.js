@@ -1,8 +1,8 @@
 import React from "react";
 import classes from './Spinner.module.css';
 
-const spinner = (props) => (
+const Spinner = (props) => (
     <div className={classes.Spinner}>Loading...</div>
 );
 
-export default spinner;
+export default Spinner;
