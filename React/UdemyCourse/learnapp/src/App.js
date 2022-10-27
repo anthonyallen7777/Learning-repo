@@ -51,8 +51,8 @@ class App extends Component {
         <Routes>
             <Route path="/checkout/*" element={<Checkout />}/>
             <Route path="/orders" element={<Orders />} />
-            <Route path="/auth" element={<Auth />} />
             <Route path="/logout" element={<Logout />} />
+            <Route path="/auth" element={<Auth />} />
             <Route path="/" exact element={<BurgerBuilder />}/>
             <Route path="/*" element={<Navigate to="/"/>} />
         </Routes>

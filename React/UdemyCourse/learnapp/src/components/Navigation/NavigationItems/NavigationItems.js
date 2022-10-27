@@ -4,7 +4,7 @@ import NavigationItem from './NavigationItem/NavigationItem';
 
 const navigationItems = (props) => {
     return (
-        <ul className={classes.NavigationItems}>
+        <ul className={classes.NavigationItems} onClick={props.closed}>
         <NavigationItem link="/">Burger Builder</NavigationItem>
         {props.isAuthenticated ? <NavigationItem link="/orders">Orders</NavigationItem>
         : null}
