@@ -2,7 +2,6 @@ import React, { Component } from "react";
 
 //redux
 import {connect} from 'react-redux';
-import * as actionCreators from '../../store/actions/index';
 
 import { Routes, Route } from "react-router";
 import { Navigate } from "react-router-dom";

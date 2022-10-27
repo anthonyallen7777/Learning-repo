@@ -1,5 +1,10 @@
 import React, { Component } from "react";
 
+import withErrorHandler from '../../../hoc/withErrorHandler/withErrorHandler';
+import axios from '../../../axios-orders';
+import withRouter from "../../../hoc/withRouter";
+import { updateObject, checkValidation } from "../../../shared/utility";
+
 //redux
 import {connect} from 'react-redux';
 import * as actionCreators from '../../../store/actions/index';
@@ -9,12 +14,6 @@ import Spinner from "../../../components/UI/Spinner/Spinner";
 import classes from './ContactData.module.css';
 
 import Input from "../../../components/UI/Input/Input";
-
-import withErrorHandler from '../../../hoc/withErrorHandler/withErrorHandler';
-
-import axios from '../../../axios-orders';
-
-import withRouter from "../../../hoc/withRouter";
 
 class ContactData extends Component {
     state = {
@@ -81,7 +80,8 @@ class ContactData extends Component {
                 },
                 value: '',
                 validation: {
-                    required: true
+                    required: true,
+                    isEmail: true
                 },
                 valid: false,
                 touched: false
@@ -119,41 +119,20 @@ class ContactData extends Component {
 
         this.props.onOrderBurger(order, this.props.token);
     }
-
-    checkValidation(value, rules) {
-        let isValid = true;
-
-        if (!rules) {
-            return true;
-        }
-        
-        if (rules.required) {
-            isValid = value.trim() !== '' && isValid;
-        }
-        
-        if (rules.minLength) {
-            isValid = value.length >= rules.minLength && isValid;
-        }
-
-        if (rules.maxLength) {
-            isValid = value.length <= rules.maxLength && isValid;
-        }
-        return isValid;
-    }
     
     inputChangedHandler = (event, inputIdentifier) => {
-        console.log(event.target.value)
-        const updatedOrderForm = {
-            ...this.state.orderForm
-        };
-        const updatedFormElement = {
-            ...updatedOrderForm[inputIdentifier]
-        };
-        updatedFormElement.value = event.target.value;
-        updatedFormElement.valid = this.checkValidation(updatedFormElement.value,
-            updatedFormElement.validation);
-        updatedFormElement.touched = true;
-        updatedOrderForm[inputIdentifier] = updatedFormElement;
+        // console.log(event.target.value);
+        
+        const updatedFormElement = updateObject(this.state.orderForm[inputIdentifier], {
+            value: event.target.value,
+            valid: checkValidation(event.target.value,
+                this.state.orderForm[inputIdentifier].validation),
+            touched: true,
+        });
+
+        const updatedOrderForm = updateObject(this.state.orderForm, {
+            [inputIdentifier]: updatedFormElement,
+        });
         
         let formIsValid = true;
         for (let inputIdentifier in updatedOrderForm) {

@@ -18,7 +18,10 @@ const rootReducer = combineReducers({
     auth: authReducer
 })
 
-const store = configureStore({reducer: rootReducer});
+const store = configureStore({
+    reducer: rootReducer,
+    devTools: process.env.NODE_ENV !== 'production',
+});
 
 const app = (
     <Provider store={store}>

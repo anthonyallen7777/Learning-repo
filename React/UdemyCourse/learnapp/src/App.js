@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Suspense } from 'react';
 import classes from './App.module.css';
 
 import { Routes, Route } from 'react-router';
@@ -11,16 +11,15 @@ import { Navigate } from 'react-router';
 import {connect} from 'react-redux';
 import * as actionCreators from './store/actions/index';
 
-
 import Layout from './containers/Layout/Layout';
 import BurgerBuilder from './containers/BurgerBuilder/BurgerBuilder';
-import Checkout from './containers/Checkout/Checkout';
-import Orders from './containers/Orders/Orders';
+import Logout  from './containers/Auth/Logout/Logout';
+//lazy loading components
+const Checkout = React.lazy(() => import('./containers/Checkout/Checkout'));
+const Orders = React.lazy(() => import('./containers/Orders/Orders'));
 
 //Auth
-import Auth from './containers/Auth/Auth';
-
-import Logout from './containers/Auth/Logout/Logout';
+const Auth = React.lazy(() => import('./containers/Auth/Auth'));
 
 class App extends Component {
   // state = {
@@ -40,7 +39,7 @@ class App extends Component {
   render() {
     let routes = (
       <Routes>
-            <Route path="/auth" element={<Auth />} />
+            <Route path="/auth" element={<Suspense><Auth /></Suspense>} />
             <Route path="/" exact element={<BurgerBuilder />}/>
             <Route path="/*" element={<Navigate to="/"/>} />
       </Routes>
@@ -49,10 +48,10 @@ class App extends Component {
     if (this.props.isAuthenticated) {
       routes = (
         <Routes>
-            <Route path="/checkout/*" element={<Checkout />}/>
-            <Route path="/orders" element={<Orders />} />
+            <Route path="/checkout/*" element={<Suspense><Checkout /></Suspense>}/>
+            <Route path="/orders" element={<Suspense><Orders /></Suspense>} />
             <Route path="/logout" element={<Logout />} />
-            <Route path="/auth" element={<Auth />} />
+            <Route path="/auth" element={<Suspense><Auth /></Suspense>} />
             <Route path="/" exact element={<BurgerBuilder />}/>
             <Route path="/*" element={<Navigate to="/"/>} />
         </Routes>

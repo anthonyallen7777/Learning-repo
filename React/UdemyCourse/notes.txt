@@ -1388,7 +1388,7 @@ route protection on the frontend with guards is important
 the server should not return any data for unauthenticated users (this how you protect your data)
 the frontend is only about providing a user experience and to prevent to user from accidentally visiting a page they shouldn't be able to
 
-
+people can always look into your javascript code if they really want to but it's always good it make it a bit harder
 
 
 
