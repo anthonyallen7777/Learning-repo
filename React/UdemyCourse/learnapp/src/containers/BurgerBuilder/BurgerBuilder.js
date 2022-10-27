@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 
 //redux
-import * as actionTypes from '../../store/actions';
 import {connect} from 'react-redux';
 
 import * as actionCreators from '../../store/actions'; //ommitting index still points to the index file

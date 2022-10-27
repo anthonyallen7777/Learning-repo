@@ -17,8 +17,6 @@ import BurgerBuilder from './containers/BurgerBuilder/BurgerBuilder';
 import Checkout from './containers/Checkout/Checkout';
 import Orders from './containers/Orders/Orders';
 
-import aux from './hoc/Auxillary';
-
 //Auth
 import Auth from './containers/Auth/Auth';
 
