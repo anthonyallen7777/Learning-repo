@@ -3,7 +3,6 @@ import classes from './App.module.css';
 
 import { Routes, Route } from 'react-router';
 
-import withRouter from './hoc/withRouter';
 
 import { Navigate } from 'react-router';
 
@@ -60,6 +59,7 @@ class App extends Component {
 
     return (
       <div className={classes.App}>
+        <h1>learn react</h1>
         <Layout>
           {routes}
         </Layout>
@@ -80,4 +80,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));
+export default connect(mapStateToProps, mapDispatchToProps)(App);

@@ -2,7 +2,6 @@ import React, { Component } from "react";
 
 import withErrorHandler from '../../../hoc/withErrorHandler/withErrorHandler';
 import axios from '../../../axios-orders';
-import withRouter from "../../../hoc/withRouter";
 import { updateObject, checkValidation } from "../../../shared/utility";
 
 //redux
@@ -102,6 +101,10 @@ class ContactData extends Component {
         formIsValid: false,
     }
 
+    componentDidMount() {
+        this.props.resetCheckoutPath();
+    }
+
     orderHandler = (event) => {
         event.preventDefault();
         const formData = {};
@@ -193,4 +196,4 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(withErrorHandler(ContactData, axios)));
+export default connect(mapStateToProps, mapDispatchToProps)(withErrorHandler(ContactData, axios));

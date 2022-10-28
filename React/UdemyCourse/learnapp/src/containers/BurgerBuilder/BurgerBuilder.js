@@ -20,16 +20,28 @@ import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary';
 
 // hoc
 import withErrorHandler from "../../hoc/withErrorHandler/withErrorHandler";
-import withRouter from "../../hoc/withRouter";
+
+import { Navigate } from "react-router";
 
 class BurgerBuilder extends Component {
     state = {
-        purchaseMode: false
+        purchaseMode: false,
+        navPath: '/'
     }
 
     componentDidMount() {
         // console.log(this.props);
         this.props.onInitIngredients();
+
+        // if (this.props.isAuthenticated) {
+        //     this.setState({navPath: '/checkout'});
+        // } else {
+        //     this.props.onSetNavPath('/auth');
+        // }
+
+        if (this.state.navPath !== '/') {
+            this.setState({navPath: '/'});
+        }
     }
 
     updatePurchaseState (ingredients) {
@@ -43,12 +55,13 @@ class BurgerBuilder extends Component {
         return sum > 0;
     }
 
-    purchaseModeHandler = () => {
+    purchaseModeHandler = (nav) => {
         if (this.props.isAuthenticated) {
             this.setState({purchaseMode: true});
         } else {
             this.props.onSetAuthRedirectPath('/checkout');
-            this.props.router.navigate('/auth');
+            // this.props.router.navigate('/auth');
+            this.setState({navPath: '/auth'});
         }
     }
 
@@ -56,9 +69,10 @@ class BurgerBuilder extends Component {
         this.setState({purchaseMode: false});
     }
 
-    purchaseContinueHandler = () => {
+    purchaseContinueHandler = (nav) => {
         this.props.onInitPurchase();
-        this.props.router.navigate('/checkout');
+        // this.props.router.navigate('/checkout');
+        this.setState({navPath: '/checkout'});
     }
 
     render() {
@@ -100,8 +114,14 @@ class BurgerBuilder extends Component {
             );
         }
 
+        let navigateToPathOnOrder = null;
+        if (this.state.navPath !== '/') {
+            navigateToPathOnOrder = <Navigate to={this.state.navPath} />
+        }
+
         return(
             <Aux>
+                {navigateToPathOnOrder}
                 <Modal show={this.state.purchaseMode}
                 modalClosed={this.purchaseCancelHandler}>
                     {orderSummary}
@@ -117,7 +137,8 @@ const mapStateToProps = state => {
         ings: state.burgerBuilder.ingredients,
         price: state.burgerBuilder.totalPrice,
         isAuthenticated: state.auth.token !== null,
-        error: state.burgerBuilder.error
+        error: state.burgerBuilder.error,
+        authRedirectPath: state.auth.authRedirectPath,
     };
 }
 
@@ -131,4 +152,4 @@ const mapDispatchToProps = dispatch => {
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(withErrorHandler(BurgerBuilder, axios)));
+export default connect(mapStateToProps, mapDispatchToProps)(withErrorHandler(BurgerBuilder, axios));

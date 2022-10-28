@@ -1390,22 +1390,72 @@ the frontend is only about providing a user experience and to prevent to user fr
 
 people can always look into your javascript code if they really want to but it's always good it make it a bit harder
 
+--------
 
+Testing
 
+writing automated tests
 
+	 Build App
+		|
+		|
+		v
+  Test manually in
+	 Browser
+	 	|
+		|
+		v
+  Automatic Tests
+		|
+		|
+		|
+		v
+ Ship app to Server
 
+Unit tests
+- tests that test a tiny fraction of app (tests a unit of app)
+- if we change anything in our app and that breaks our app or breaks a component then the unit test will fail and we'll get a error (we won't have to manually test in the browser)
+- very important in big applications
+- instead of adding at the end of the build workflow you could do tes driven development (this puts the tests first, write tests before you write any application code)
 
+why testing?
+														First Draft		New Feature
+Component should output "Hello"								PASS 			PASS
 
+Component should always render component "PersonData"		PASS 			PASS
 
+Component should always receive a "persons" prop 			PASS 			FAIL
 
+Component should always render the "NewPerson" component 	PASS 			FAIL
+when a "editable" (true) prop is received
 
+----
 
+testing tools
 
+Test Runner 			Executes Tests and provides 			Jest
+						Validation Library
 
+Testing Utitilites 		"Simulates" the React App (mounts 		React Test Utils
+						components, allows you to dig into 		Enzyme
+						the DOM)
 
+npm install --save-dev jest
+npm install --save-dev react-test-renderer
+npm install --save-dev @testing-library/react
 
+----
 
+What to Test
 
+Don't test the library!
+- React, axios, redux
+
+Don't test too complex connections!
+
+Do test isolated units!
+
+Do test your conditional outputs!
 
 
 

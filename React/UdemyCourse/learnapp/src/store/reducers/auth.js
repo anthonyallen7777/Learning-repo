@@ -7,6 +7,7 @@ const initialState = {
     error: null,
     loading: false,
     authRedirectPath: '/',
+    navPath: '/'
 };
 
 const authStart = (state, action) => {
