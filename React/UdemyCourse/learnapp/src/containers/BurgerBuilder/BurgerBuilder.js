@@ -23,7 +23,7 @@ import withErrorHandler from "../../hoc/withErrorHandler/withErrorHandler";
 
 import { Navigate } from "react-router";
 
-class BurgerBuilder extends Component {
+export class BurgerBuilder extends Component {
     state = {
         purchaseMode: false,
         navPath: '/'

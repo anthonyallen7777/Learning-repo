@@ -984,6 +984,7 @@ Parses URL /Path -> Read Config -> Render / Load appropriate JSX / Component
 
 - we don't actually have different files but we just re-render part of the single page or the entire page depending on which path the user navigated to
 
+npm i react-router react-router-dom
 react-router
 react-router-dom
 - defacto standard packages for routing in React
@@ -1437,7 +1438,7 @@ Test Runner 			Executes Tests and provides 			Jest
 						Validation Library
 
 Testing Utitilites 		"Simulates" the React App (mounts 		React Test Utils
-						components, allows you to dig into 		Enzyme
+						components, allows you to dig into 		Enzyme (DOESNT WORK WITH REACT 18)
 						the DOM)
 
 npm install --save-dev jest
@@ -1457,7 +1458,11 @@ Do test isolated units!
 
 Do test your conditional outputs!
 
+----
 
+mock
+- replace
+- good for working with async
 
 
 
