@@ -59,7 +59,6 @@ class App extends Component {
 
     return (
       <div className={classes.App}>
-        <h1>learn react</h1>
         <Layout>
           {routes}
         </Layout>

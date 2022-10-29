@@ -1464,27 +1464,43 @@ mock
 - replace
 - good for working with async
 
+--------
 
+Deployment
 
+Check(& Adject) Basepath				<BrowserRouter basename="/my-app">
 
+Build & Optimize Project				npm run build in create-react-app project
 
+Server must ALWAYS serve				To ensure that Routing works correctly
+index.html (also for 404 cases)
 
+Upload Build Artifacts to (static) 		In /build folder when using create-react-app
+Server
 
+--------
 
+Roundup
 
+static website
+- a static website is a page that only uses html, javascript and css
+- instead of using react router you usea a folder structure where each folder has an index.html file and the according assets belonging to the file in it
+- Gatsby offers the capability to build a regular react app and spits out a static website based off the react app you build
 
+react native
+- react but for mobile apps, native iOS or Android apps
+- you write javascript code and then react native compiles that to iOS and Android
 
+Material-UI and React-Boostrap
+- component library
+- give you pre-build and pre-styled components
 
+Preact
+- lightweight alternative to React
 
+--------
 
-
-
-
-
-
-
-
-
+Bonus
 
 
 
