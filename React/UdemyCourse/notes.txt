@@ -1500,7 +1500,12 @@ Preact
 
 --------
 
-Bonus
+Bonus Animations
+
+animations
+- guide user attention, show the user what changed, make it nicer to the eye, very important concept
+
+----
 
 
 
