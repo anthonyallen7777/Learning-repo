@@ -1507,6 +1507,9 @@ animations
 
 ----
 
+react transition group
+- allows you to smoothly animate elements when are they are added and removed from the DOM
+
 
 
 
