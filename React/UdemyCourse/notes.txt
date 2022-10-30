@@ -1510,11 +1510,19 @@ animations
 react transition group
 - allows you to smoothly animate elements when are they are added and removed from the DOM
 
+react motion
+- alternative to react transition group
+- uses real world physics to determine animations
 
+react move
+- another alternative
+- a little more complicated
 
+react router transition
+- ANOTHER alternative
+- Route transitions
 
-
-
+----
 
 
 
