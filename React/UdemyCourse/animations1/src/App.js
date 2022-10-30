@@ -1,18 +1,31 @@
 import React, { Component } from "react";
 
-import "./App.css";
+import classes from './App.module.css';
 import Modal from "./components/Modal/Modal";
 import Backdrop from "./components/Backdrop/Backdrop";
 import List from "./components/List/List";
 
 class App extends Component {
+  state = {
+    modalIsOpen: false,
+  }
+
+  showModal = () => {
+    this.setState({modalIsOpen: true});
+    console.log("TESTING BUTTON PRESS");
+  }
+
+  closeModal = () => {
+    this.setState({modalIsOpen: false});
+  }
+
   render() {
     return (
-      <div className="App">
+      <div className={classes.App}>
         <h1>React Animations</h1>
-        {/* <Modal />
-        <Backdrop /> */}
-        <button className="Button">Open Modal</button>
+        <Modal closed={this.closeModal} show={this.state.modalIsOpen}/>
+        <Backdrop />
+        <button className={classes.Button} onClick={this.showModal}>Open Modal</button>
         <h3>Animating Lists</h3>
         <List />
       </div>
