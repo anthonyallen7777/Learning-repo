@@ -1570,27 +1570,36 @@ react memo reminder
 - only rerenders the component when the props it depends on change
 and not always when the parent component changes
 
+----
 
+useState
+- different from a class-based state where the state had to always be an object, when using useState() the state can be any value
+- is detached from the component so the state survives rerender of the component
 
+array destructuring
+- allews you to pull elements out of an array and store them in separate variables
 
+const [enteredTitle, setEnteredTitle] = useState('');
+const [enteredAmount, setenteredAmount] = useState('');
 
+<input type="text" id="title" value={enteredTitle}
+onChange={event => setEnteredTitle(event.target.value)}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+																-----------------
+					 (calls)						 creates 	v				|
+Functional Component -------> useState(initialState) -------> State---------|	|
+MyComp = props => ...				|							|			|	|
+		^							v							|			|	|
+		|					Array with exactly two		Managed by React 	|	|
+		--------------------	elements			   (behind the scenes)	|	|
+									|										|	|
+							----------------- 								|	|
+							v 				v 								|	|
+						 State 			  State 							|	|
+						pointer 		  update --------------------------------
+							|			 function 							|
+							|												|
+							-------------------------------------------------
 
 
 
