@@ -1602,63 +1602,177 @@ MyComp = props => ...				|							|			|	|
 							-------------------------------------------------
 
 
+----
 
+useEffect()
+- used to manage side-effects (side-effect means there is some logic that runs that effects your app, anything that you cannot manage with normal render flow (like a http request))
+- by default useEffect gets executed right after AND for every render cycle
 
+useEffect(function to render after every render cycle, an array with the dependencies of your function)
 
+- second argument, only when the dependencies changes will the function re-run
 
+useing useEffect() with [] as a second argument will act like ComponentDidMount. It runs ONLY ONCE (after the first render)
 
+useEffect(() => {}, []);
 
+- should configure the array (second arg) in an honest way, really specify your dependencies, if you have a dependency
 
+useEffect(() => {
+	console.log("RENDERING INGREDIENTS", userIngredients);
+}, [userIngredients]);
 
+In JS functions are objects and behave like any other value
 
+object destructoring
+const {onLoadingIngredients} = props;
 
+cleanup
+- will run for the previous effect before the new effect is applied
 
+useEffect(() => {
+	const timer = setTimeout(() => {
+    }, 500);
 
+	return () => {
+      clearTimeout(timer);
+    };
+}, []);
 
+if your have [] as dependences (ie the effect only runs once), the cleanup function runs when the component gets unmounted.
 
+----
 
+useCallback()
+- caches a function so it survives rerun or cycles
+- makes it so the function it wraps is not re-created on re-render
 
+const filteredIngredientsHandler = useCallback(filteredIngredients => {
+    setUserIngredients(filteredIngredients);
+  }, []);
 
+----
 
+useRef
+- allows you to create a reference
 
+const inputRef = useRef();
 
+<input
+ref={inputRef}
+type="text"
+value={enteredFilter}
+onChange={event => setEnteredFilter(event.target.value)}/>
 
+----
 
+setState & State Update Batching
 
+setNewSet(oldState + 1) 	vs 		setNewSet(prevState => prevState +1)
+				 React batches state updates!
+				  			|
+				  			v
+				 All state updates from one
+				and the same synchonous event
+				handler are batched together!
 
+				 After setNewState(), you can't
+				immediatley use the new state when
+				 NOT using the function form!
 
+----
 
+useReducer()
+- reducers are functions that take some input and return some output
+- useReducer() uses that and gives a clear defined way of finding state changes in sate updates and it will manage the state for you
+- useReducer() has no connection to the REdux library
+- React will re-render the component whenever your reducer returns the new state
+- useful when you have more complex state, state that relies on the old state, or if multiple state values work together
 
+const ingredientReducer = (currentIngredients, action) => {
+  switch (action.type) {
+    case 'SET_INGREDIENT':
+      return action.ingredients;
+    case 'ADD_INGREDIENT':
+      return [...currentIngredients, action.ingredient];
+    case 'DELETE_INGREDIENT':
+      return currentIngredients.filter(ing => ing.id !== action.id);
+    default:
+      throw new Error('Should not get to default case in ingredientReducer!');
+  }
+}
 
+// Inside component function
+const [userIngredients, dispatch] = useReducer(ingredientReducer, []);
 
+----
 
+useContext()
+- helps handle cases where you need certain data in multiple components and you dont want to pass that state across multiple layers
 
+import React, {useState} from 'react';
 
+export const AuthContext = React.createContext({
+    iSAuth: false,
+    login: () => {}
+});
 
+src/context/auth-context.js
+const AuthContextProvider = props => {
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
 
+    const loginHandler = () => {
+        setIsAuthenticated(true);
+    }
+    return (
+        <AuthContext.Provider
+        value={{login: loginHandler, isAuth: isAuthenticated}}>
+            {props.children}
+        </AuthContext.Provider>
+    );
+}
 
+export default AuthContextProvider;
 
+index.js
+root.render(
+    <AuthContextProvider>
+        <App />
+    </AuthContextProvider>
+);
 
+app.js
+import { AuthContext } from './context/auth-context';
 
+const App = props => {
+  const authContext = useContext(AuthContext)
 
+  let content = <Auth />;
+  if (authContext.isAuth) {
+    content = <Ingredients />;
+  }
+  return content;
+};
 
+----
 
+useMemo()
+- hook where you can save a value so the value isn't re-created, another way of memorizing a component
+- if you're storing components you typically want to use react memo instead of useMemo BUT with useMemo you store any data which you don't want to re-create on every re-render cycle (an operation that calculates a more complex value, a longer calculation, use useMemo)
+- first argument, a function that react will execute for and should return the value that you want to memorize
+- second argument, a list of dependencies (this tells react when it should re-run this function to create a new object that it should memorize)
+-shouldn't wrap every component with react memo or useMemo b/c react always needs to check whether props changed and if it's a super small component re-rendering it might be faster then do that check
 
+const ingredientList = useMemo(() => {
+    return <IngredientList ingredients={userIngredients} onRemoveItem={removeIngredientHandler} />
+  }, [userIngredients, removeIngredientHandler]);
 
+----
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+custom hooks
+- any component that uses your own hook as if you had the code written in the component directly, so not like one function shared by multiple components, no, each functional component gets its own SNAPSHOT of this hook
+- a way to share logic and not data
+- the hook will be called wherever the component that is using it gets re-executed
 
 
 
@@ -1808,6 +1922,11 @@ MyComp = props => ...				|							|			|	|
 
 --------
 EXTRA STUFF
+
+{props.loading && <LoadingIndicator />}
+this means the component will only render if the prop loading is true else null is shown (nothing) alternative to this
+{props.loading ? <LoadingIndicator /> : null}
+
 
 VS Code multi-line comment
 Ctrl + / - will comment out all the lines with single line comments
