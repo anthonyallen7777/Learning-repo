@@ -1,54 +1,51 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 
 import Modal from "../../components/UI/Modal/Modal";
 import Aux from '../Auxillary';
 
 const withErrorHandler =  (WrappedComponent, axios) => {
-    return class extends Component {
-        constructor(props) {
-            super(props);
-            this.state = {
-                error: null
-            }
+    return props => {
+        const [error, setError] = useState(null);
 
-            //clear error when user sends request
-            this.requestInterceptor = axios.interceptors.request.use(req => {
-                this.setState({error: null});
-                return req;
-            });
+        //clear error when user sends request
+        const requestInterceptor = axios.interceptors.request.use(req => {
+            setError(null);
+            return req;
+        });
 
-            //check for errors in response
-            this.responseInterceptor = axios.interceptors.response.use(res => res, err => {
-                this.setState({error: err});
-                console.log(err);
-            });
-        }
+        //check for errors in response
+        const responseInterceptor = axios.interceptors.response.use(res => res, err => {
+            setError(err);
+            console.log(err);
+        });
 
         //prevent memory leaks by ejecting interceptors
         //because this component will be run on multiple other components (it's a HOC component)
         //we need to make sure it doesn't create lots of interceptors that sit around in memory
-        componentWillUnmount() {
-            // console.log('Will Unmount', this.requestInterceptor, this.responseInterceptor);
-            axios.interceptors.request.eject(this.requestInterceptor);
-            axios.interceptors.response.eject(this.responseInterceptor);
-        }
+        // console.log('Will Unmount', this.requestInterceptor, this.responseInterceptor);
 
-        errorConfirmedHandler = () => {
-            this.setState({error: null});
-        }
+        
+        useEffect(() => {
+            //useEffect clean up function is essenstially componentWillUnmount
+            return () => {
+                axios.interceptors.request.eject(requestInterceptor);
+                axios.interceptors.response.eject(responseInterceptor);
+            };
+        }, [requestInterceptor, responseInterceptor]);
 
-        render() {
-            return (
-            <Aux>
-                <Modal
-                show={this.state.error}
-                modalClosed={this.errorConfirmedHandler}>
-                    {this.state.error ? this.state.error.message : null}
-                </Modal>
-                <WrappedComponent {...this.props} />
-            </Aux>
-            );
+        const errorConfirmedHandler = () => {
+            setError(null);
         }
+        return (
+        <Aux>
+            <Modal
+            show={error}
+            modalClosed={errorConfirmedHandler}>
+                {error ? error.message : null}
+            </Modal>
+            <WrappedComponent {...props} />
+        </Aux>
+        );
     };
 };
 

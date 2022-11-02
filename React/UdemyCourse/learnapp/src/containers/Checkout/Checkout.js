@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useEffect, useState } from "react";
 
 //redux
 import {connect} from 'react-redux';
@@ -9,59 +9,55 @@ import { Navigate } from "react-router-dom";
 import CheckoutSummary from "../../components/Order/CheckoutSummary/CheckoutSummary";
 import ContactData from "./ContactData/ContactData";
 
-class Checkout extends Component {
-    state = {
-        navPath: '/checkout',
-        enteringOrderInfo: false
-    }
+const Checkout = props => {
+    const [navPath, setNavPath] = useState('/checkout');
+    const [enteringOrderInfo, setEnteringOrderInfo] = useState(false);
 
-    componentDidMount() {
-        this.setState({enteringOrderInfo: false});
-    }
+    useEffect(() => {
+        setEnteringOrderInfo(false);
+    }, []);
 
-    checkoutCancelledHandler = () => {
+    const checkoutCancelledHandler = () => {
         // this.props.router.navigate(-1);
-        this.setState({navPath: '/'});
+        setNavPath('/');
     }
 
-    checkoutContinuedHandler = () => {
+    const checkoutContinuedHandler = () => {
         // this.props.router.navigate('/checkout/contact-data', {replace: true});
-        if (this.state.enteringOrderInfo !== true) {
-            this.setState({navPath: '/checkout/contact-data', enteringOrderInfo: true});
+        if (enteringOrderInfo !== true) {
+            setNavPath('/checkout/contact-data');
+            setEnteringOrderInfo(true);
         }
     }
 
-    resetCheckoutPath = () => {
-        this.setState({navPath: '/checkout'});
+    const resetCheckoutPath = () => {
+        setNavPath('/checkout');
     }
 
-    render() {
-
-        let navigateToPathOnOrder = null;
-        if (this.state.navPath !== '/checkout') {
-            navigateToPathOnOrder = <Navigate to={this.state.navPath} />
-        }
-
-        let summary = <Navigate to="/" />
-        if (this.props.ings) {
-            const purchasedRedirect = this.props.purchased ? <Navigate to="/" /> : null;
-            summary = (
-                <div>
-                    {navigateToPathOnOrder}
-                    {purchasedRedirect}
-                    <CheckoutSummary
-                        checkoutCancelled={this.checkoutCancelledHandler}
-                        checkoutContinued={this.checkoutContinuedHandler}
-                        ingredients={this.props.ings} />
-                    <Routes>
-                        <Route path={'/contact-data'}
-                        element={<ContactData resetCheckoutPath={this.resetCheckoutPath}/>} />
-                    </Routes>
-                </div>
-            );
-        }
-        return summary;
+    let navigateToPathOnOrder = null;
+    if (navPath !== '/checkout') {
+        navigateToPathOnOrder = <Navigate to={navPath} />
     }
+
+    let summary = <Navigate to="/" />
+    if (props.ings) {
+        const purchasedRedirect = props.purchased ? <Navigate to="/" /> : null;
+        summary = (
+            <div>
+                {navigateToPathOnOrder}
+                {purchasedRedirect}
+                <CheckoutSummary
+                    checkoutCancelled={checkoutCancelledHandler}
+                    checkoutContinued={checkoutContinuedHandler}
+                    ingredients={props.ings} />
+                <Routes>
+                    <Route path={'/contact-data'}
+                    element={<ContactData resetCheckoutPath={resetCheckoutPath}/>} />
+                </Routes>
+            </div>
+        );
+    }
+    return summary;
 };
 
 const mapStateToProps = state => {

@@ -1,4 +1,4 @@
-import React, { Component, Suspense } from 'react';
+import React, { Suspense, useEffect } from 'react';
 import classes from './App.module.css';
 
 import { Routes, Route } from 'react-router';
@@ -20,51 +20,41 @@ const Orders = React.lazy(() => import('./containers/Orders/Orders'));
 //Auth
 const Auth = React.lazy(() => import('./containers/Auth/Auth'));
 
-class App extends Component {
-  // state = {
-  //   show: true
-  // };
+const App = props => {
+  useEffect(() => {
+    props.onTryAutoSignup();
+  }, []);
 
-  // componentDidMount() {
-  //   setTimeout(() => {
-  //     this.setState({show: false});
-  //   }, 5000);
-  // }
+  let routes = (
+    <Routes>
+          <Route path="/auth" element={<Auth />} />
+          <Route path="/" exact element={<BurgerBuilder />}/>
+          <Route path="/*" element={<Navigate to="/"/>} />
+    </Routes>
+  );
 
-  componentDidMount() {
-    this.props.onTryAutoSignup();
-  }
-  
-  render() {
-    let routes = (
+  if (props.isAuthenticated) {
+    routes = (
       <Routes>
-            <Route path="/auth" element={<Suspense><Auth /></Suspense>} />
-            <Route path="/" exact element={<BurgerBuilder />}/>
-            <Route path="/*" element={<Navigate to="/"/>} />
+          <Route path="/checkout/*" element={<Checkout />}/>
+          <Route path="/orders" element={<Orders />} />
+          <Route path="/logout" element={<Logout />} />
+          <Route path="/auth" element={<Auth />} />
+          <Route path="/" exact element={<BurgerBuilder />}/>
+          <Route path="/*" element={<Navigate to="/"/>} />
       </Routes>
     );
-
-    if (this.props.isAuthenticated) {
-      routes = (
-        <Routes>
-            <Route path="/checkout/*" element={<Suspense><Checkout /></Suspense>}/>
-            <Route path="/orders" element={<Suspense><Orders /></Suspense>} />
-            <Route path="/logout" element={<Logout />} />
-            <Route path="/auth" element={<Suspense><Auth /></Suspense>} />
-            <Route path="/" exact element={<BurgerBuilder />}/>
-            <Route path="/*" element={<Navigate to="/"/>} />
-        </Routes>
-      );
-    }
-
-    return (
-      <div className={classes.App}>
-        <Layout>
-          {routes}
-        </Layout>
-      </div>
-    );
   }
+
+  return (
+    <div className={classes.App}>
+      <Suspense fallback={<p>Loading...</p>}>
+      <Layout>
+        {routes}
+      </Layout>
+      </Suspense>
+    </div>
+  );
 }
 
 const mapStateToProps = state => {
