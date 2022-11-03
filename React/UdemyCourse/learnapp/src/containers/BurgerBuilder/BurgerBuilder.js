@@ -46,7 +46,7 @@ export const BurgerBuilder = props => {
     useEffect(() => {
         onInitIngredients();
         if (navPath !== '/') setNavPath('/');
-    }, [onInitIngredients, navPath]);
+    }, []);
 
     const updatePurchaseState = (ingredients) => {
         const sum = Object.keys(ingredients)

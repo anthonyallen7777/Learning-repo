@@ -1774,20 +1774,73 @@ custom hooks
 - a way to share logic and not data
 - the hook will be called wherever the component that is using it gets re-executed
 
+--------
+
+Redux Saga
+- alternative to Redux
+- different approach of working with async code
+
+npm i redux-saga
+
+----
+
+Sagas
+- kind of functions which run up certain actions and handle all your side-effects logic (ex. accessing local storage, reaching out to a server, changing the route or executing a timer)
 
 
+function* logout(action) {
+    yield localStorage.removeItem('token');
+    yield action.localStorage.removeItem('expirationDate');
+    yield action.localStorage.removeItem('userId');
+    yield put({
+        type: actionTypes.AUTH_LOGOUT,
+    });
+}
 
+* turns this function into a generator
+- functions which can be executed incrementally
+- you can pause during function execution to wait for async code to finish
 
+yield
+- means this step will be executed and it will wait for it to finish
 
+----
 
+call
+- good for testing because you can easily mock call
 
+import {call} from 'redux-saga/effects';
 
+yield call([localStorage,  'removeItem'], "token");
 
+----
 
+all
+- easier way to pass all the actions you want to yield
+- can be used for (example two axios requests and you want to run them simulataneously you can use all)
+- good option if you want to run multiple generators or multiple tasks simulataneously
+export function* watchAuth() {
+    yield all([
+        takeEvery(actionTypes.AUTH_CHECK_TIMEOUT, checkAuthTimeoutSaga),
+        takeEvery(actionTypes.AUTH_INITIATE_LOGOUT, logoutSaga),
+        takeEvery(actionTypes.AUTH_USER, authUserSaga),
+        takeEvery(actionTypes.AUTH_CHECK_STATE, authCheckStateSaga)
+    ]);
+}
 
+----
 
+takeLatest
+- will automatically cancel any ongoing executions and always only execute the latest one
 
+export function* watchOrder() {
+    yield takeLatest(actionTypes.PURCHASE_BURGER, purchaseBurgerSaga);
+    yield takeEvery(actionTypes.FETCH_ORDERS, fetchOrdersSaga);
+}
 
+--------
+
+Nextjs
 
 
 
