@@ -100,9 +100,10 @@ const ContactData = props => {
 
     const [formIsValid, setFormIsValid] = useState(false);
 
+    const {resetCheckoutPath} = props;
     useEffect(() => {
-        props.resetCheckoutPath();
-    }, []);
+        resetCheckoutPath();
+    }, [resetCheckoutPath]);
 
     const orderHandler = (event) => {
         event.preventDefault();
