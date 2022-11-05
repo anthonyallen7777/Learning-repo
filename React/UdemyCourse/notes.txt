@@ -2111,61 +2111,6 @@ npm i --save-dev html-webpack-plugin
 
 npm i --save-dev file-loader
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 --------
 EXTRA STUFF
 
@@ -2173,10 +2118,13 @@ EXTRA STUFF
 this means the component will only render if the prop loading is true else null is shown (nothing) alternative to this
 {props.loading ? <LoadingIndicator /> : null}
 
+----
 
 VS Code multi-line comment
 Ctrl + / - will comment out all the lines with single line comments
 Alt + Shift + A - will comment out all the lines with mult-line comments
+
+----
 
 Static property
 - it can be accessed from outside without the need to instantiate an object based on this class first
@@ -2214,4 +2162,3 @@ let myCar = new Car("Ford");
 document.getElementById("demo").innerHTML = Car.hello(myCar); 
 
 ----
-
