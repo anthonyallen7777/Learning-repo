@@ -1841,34 +1841,129 @@ export function* watchOrder() {
 --------
 
 Nextjs
+- minimalistic framework for server-rendered React apps
+- forces a specific folder structure (manages a lot for you)
+- gives you server side rendering out of the box
+- makes the creation of React app more convenient (especially the server side rendering part)
+
+server side rendering
+- when a user enters a URL leading to your React app or one your pages it will pre-render that page on the server so that the server returns that pre-rendered html code
+- server side rendering apps are very helpful if you have an app that is highly dependent on being found in search engines
+
+			How Server Side Rendering Works (SSR)
+						
+						Server<---Fetch & Render React App--->React App code
+						^	|
+        First Page Load |	| Return rendered First Page
+						|	| + React App Bundle
+						|	v
+					Client (Browser)-----
+							^			|
+							------------- Re-render on Client (Single-Page App)
+																	(SPA)
+
+npm run dev
+
+----
+
+changing routes with nextjs
+
+import Link from "next/link";
+import Router from "next/router";
+
+<p>Go to <Link href="/auth">Auth</Link></p>
+
+imperatively (with code)
+<button onClick={() => Router.push('/auth')}></button>
+
+----
+
+styling
+
+<style jsx>{`
+    div {
+        border: 1px solid #eee;
+        box-shadow: 0 2px 3px #ccc;
+        text-align: center;
+    }
+`}</style>
+
+----
+
+error handling
+
+_error.js
+
+import React from "react";
+import Link from "next/link";
+
+const errorPage = () => {
+    return (
+        <div>
+            <h1>Oh no!, something went wrong.</h1>
+            <p>Try <Link href="/auth">going home</Link>.</p>
+        </div>
+    );
+};
+
+export default errorPage;
+
+----
+
+components and lifecycle hooks
+
+getInitialProps
+- executed on the server first. Will only be executed on if you navigate there within the app. (if you navigate by typing the URL and hitting enter or refresh it navigated on the SERVER)
+- it executed either on the server or the client. This gives you the ability to initialize your app before it loads
+- on the server by using getInitialProps you could fetch data from database and then pre-populate the props with props of your choice
 
 
+static async getInitialProps(context) {
+    console.log(context);
+    return{ appName: 'Super App'};
+}
 
+OR 
 
+static getInitialProps(context) {
+    console.log(context);
+    const promise = new Promise((resolve, reject) => {
+        setTimeout(() => {
+            resolve({ appName: 'Super App'});
+        }, 1000);
+    });
+    // promise.then();
+    return promise;
+}
 
+<h1>The Main Page of {this.props.appName}</h1>
 
+getInitialProps in functional components
 
+authIndexPage.getInitialProps = (context) => {
+    const promise = new Promise((resolve, reject) => {
+        setTimeout(() => {
+            resolve({appName: 'Super App (Auth)'});
+        }, 1000);
+    });
+    // promise.then();
+    return promise;
+};
 
+<h1>The Auth Index Page of {props.appName}</h1>
 
+----
 
+npm run build
 
+To deploy you need a host which is able to run nodeJS because nextjs uses nodejs and only works on nodejs
 
+ship your entire project there then
+run npm start
 
+--------
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+webpacks
 
 
 
