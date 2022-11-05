@@ -1963,55 +1963,153 @@ run npm start
 
 --------
 
-webpacks
+Webpack
+- not just a bundler (concatonate files)
+- also optimizes your files and you can hook in various plug-ins (loaders) to transform your files (ex transpile next generation javascript to current generation javascript)
+- at its core the idea is to have js files, css files, jpg files and bundle them together (by analyzing connections between the files like imports and bundles everything together)
+
+						   How it works
+
+  Multiple Entry Points --->  entry
+	are Possible		   (e.g. app.js)
+								|
+  File-type dependent ---->  Loaders
+  transformation   (e.g. babel-loader, css-loader)
+								|
+     Global ------------->   Plugins
+  transformation          (e.g. uglify)
+								|
+								v
+  Correctly ordered, ------>  ouput
+  concatenated output  (e.g. dist/bundle.js)
+
+----
+
+basic workflow requirements
+- compile next-gen javascript features
+- handle JSX
+- css autoprefixing
+- support image imports
+- optimize code
+
+----
+
+.gitignore
+
+npm init
+
+npm i --save-dev webpack webpack-dev-server
+
+src folder
+
+index.html
+
+assets folder
+
+components folder
+
+container folder
+
+index.js
+
+index.css
+
+app.js
+
+....
+
+----
+
+core libraries
+
+npm i react react-dom react-router-dom
+
+----
+
+to use webpack
+
+npm i --save-dev webpack-cli
+
+npm i --save-dev @babel/core @babel/preset-env @babel/preset-react @babel/preset-stage-2 babel-loader @babel/plugin-proposal-class-properties
 
 
+npm i --save-dev style-loader css-loader
+npm i --save-dev postcss-loader
+npm i --save autoprefixer
 
+package.json
+"browserslist": "> 1%, last 2 versions"
 
+npm i --save-dev url-loader
 
+webpack.config.js
+const path = require('path');
+const autoprefixer = require('autoprefixer');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
+module.exports = {
+    mode: 'development',
+    entry: './src/index.js',
+    output: {
+        path: path.resolve(__dirname, 'dist'),
+        filename: 'bundle.js',
+        publicPath: ''
+    },
+    devtool: 'eval-cheap-module-source-map',
+    module: {
+        rules: [
+            {
+                test: /\.js$/,
+                loader: 'babel-loader',
+                exclude: /node_modules/
+            },
+            {
+                test: /\.css$/,
+                exclude: /node_modules/,
+                use: [
+                    {loader: 'style-loader'},
+                    {loader: 'css-loader', options: {
+                        importLoaders: 1,
+                        modules: {
+                            localIdentName: '[name]__[local]__[hash:base64:5]'
+                        }
+                        }
+                    },
+                    {loader: 'postcss-loader', options: {
+                        postcssOptions: {
+                            ident: 'postcss',
+                            plugins: [
+                                "autoprefixer"
+                            ]
+                        }
+                    }}
+                ]
+            },
+            {test: /\.(png|jpe?g|gif)$/,
+            use: [
+                {
+                    loader: 'url-loader',
+                    options: {
+                        limit: 8000,
+                        name: 'images/[name].[ext]'
+                    }
+                }
+            ]
+            }
+        ]
+    },
+    plugins: [
+        new HtmlWebpackPlugin({
+            template: __dirname + '/src/index.html',
+            filename: 'index.html',
+            inject: 'body'
+        })
+    ]
+};
 
+npm i --save-dev html-webpack-plugin
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+npm i --save-dev file-loader
 
 
 
