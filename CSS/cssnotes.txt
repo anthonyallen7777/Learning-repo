@@ -1,0 +1,96 @@
+CSS
+-cascading style sheets
+
+CSS 1 - 1996
+CSS 2 - 1998
+CSS 3 - In Development
+- Split into Modules
+
+Universal selector
+
+* {
+	color: red;
+}
+
+Attribute selector
+
+<button disabled>
+	Click
+</button>
+
+[disabled] {
+	color: red;
+}
+
+Multi class selector
+
+<div class="main-title second-version">
+	<h1>Hello</h1>
+</div>
+
+.main-title {
+	
+}
+
+.second-version {
+	
+}
+
+Priority order
+
+Inline Styles
+
+#ID selectors
+
+.class, :pseudo-class and [atrribute] selectors
+
+<Tag> and ::pseudo-element selectors
+
+* selector
+
+Inherited from parents selectors
+
+
+
+Combinators
+
+adjacent
+
+h2 + p {
+	color: red;
+}
+
+- same parent
+- second element comes immediately after
+
+general
+
+h2 ~ p {
+	color: red;
+}
+
+- same parent
+- second element on the same element but doesn't have to be immediately after
+
+child
+
+div > p {
+	color: red;
+}
+
+- seconde element is a direct child of first element
+
+descendant
+
+div p {
+	color: red;
+}
+
+- all second elements no matter if they are a direct child or not
+
+
+box-sizing: content-box;
+setting the width and height only applies to the content
+
+box-sizing: border-box;
+setting width and height includes padding and border (doesn't include margin)
