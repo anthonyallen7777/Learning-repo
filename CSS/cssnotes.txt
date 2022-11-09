@@ -252,3 +252,26 @@ font-size: 2em;
 
 font-size: 1.1rem;
 - take the browser font-size and multiply by 1.1
+
+
+margin: 3rem 0;
+margin-top: 6rem;
+
+padding-top: 2rem;
+
+
+
+       property                 "recommended" Unit
+font-size (root element)         %     (nothing)
+font-size                        rem (em => Children only)
+padding  border  margin          rem    px     rem
+   width     height              %    vw   %    vh
+   to        bottom                 %         %
+   left      right                  %         %
+
+
+
+center elements
+
+margin: auto
+- only works for block level elements with an explicitly assigned width
