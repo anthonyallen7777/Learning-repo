@@ -94,3 +94,17 @@ setting the width and height only applies to the content
 
 box-sizing: border-box;
 setting width and height includes padding and border (doesn't include margin)
+
+a:not(.active) {
+	color:blue;
+}
+
+classes are css specific
+
+ids can have other non-css use (like jumping to a section of a page)
+
+browser support
+- make sure the features you want to use are supported by the browsers your users are most like to use
+
+caniuse.com (market share feature)
+mozilla also have a browser support page

@@ -19,7 +19,7 @@ function App() {
             <li className={classes.MainNav__Item}>
               <a href="/customers">Customers</a>
             </li>
-            <li className={classes.MainNav__Item}>
+            <li className={classes.MainNav__Item + ' ' + classes.MainNav__Item__cta}>
               <a href="/hosting">Start Hosting</a>
             </li>
           </ul>

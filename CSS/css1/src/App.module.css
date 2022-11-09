@@ -10,7 +10,8 @@ body {
 }
 .Content1 {
   color: white;
-  background-color: rgb(240, 85, 68);
+  background: url('./assets/testimage1.jpeg');
+  background-size: 700px 100%;
   font-family: Impact, sans-serif;
   width: 100%;
   height: 528px;
@@ -62,4 +63,26 @@ body {
 .MainNav__Item a {
   color:rgb(23, 49, 23);
   text-decoration: none;
+  font-weight: bold;
+  padding: 3px 0;
+}
+
+.MainNav__Item a:hover,
+.MainNav__Item a:active {
+  color: white;
+  border-bottom: 2px solid white;
+}
+
+.MainNav__Item__cta a {
+  color: white;
+  background-color: rgb(240, 85, 68);
+  padding: 8px 16px;
+  border-radius: 8px;
+}
+
+.MainNav__Item__cta a:hover,
+.MainNav__Item__cta a:active {
+  color: rgb(240, 85, 68);
+  background-color: white;
+  border: none;
 }
