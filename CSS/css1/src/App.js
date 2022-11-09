@@ -2,7 +2,9 @@ import React from "react";
 import classes from './App.module.css';
 import testimage1 from './assets/testimage1.jpeg';
 
-import { NavLink, Route } from "react-router-dom";
+import { NavLink, Route, Routes } from "react-router-dom";
+
+import Page2 from "./pages/page2";
 
 function App() {
   return (
@@ -38,10 +40,6 @@ function App() {
           </div>
         </div>
       </main>
-
-      {/* <Routes>
-        <Route />
-      </Routes> */}
     </React.Fragment>
   );
 }

@@ -108,3 +108,147 @@ browser support
 
 caniuse.com (market share feature)
 mozilla also have a browser support page
+
+box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.5);
+
+position: static; //default value
+absolute
+relative
+fixed
+sticky
+
+- fixed and absolute positions values specify the distance to the parent element
+- relative position values specify the distance from the current position
+- sticky hybrid of relative and fixed, the elements will act like a fixed elemnt as soon as you reach the border
+
+top
+bottom
+left
+right
+
+viewport
+- is the visible part/area of web page "browser window"
+
+changing the width of inline elements doesn't change 
+
+z-index: auto; //defaualt value
+lower the value the further away it is from the user
+higher the value the closer to the user it is
+
+overflow: hidden; //hides elements outside of element
+
+background-postion //set init position, relative to background position layer
+background-repeat //defines how background image repeats
+background-origin //set background positioning area
+background-clip //define where background extends underneath border
+background-attachment //sets the scrolling behavior of the background image
+
+backgroud-image: url();
+background-size: auto 100%;
+background-size: contain;
+background-size: cover;
+backgroud-repeat: no-repeat;
+backgroud-position: 0% 50%;
+backgroud-position: center;
+backgroud-position: left top;
+backgroud-position: left 10% bottom 20%;
+background-origin: border-box;
+background-clip: content-box;
+background-clip: border-box;
+background-attachment: scroll;
+background-attachment: fix;
+
+
+<div class="container">
+	<img src="../images/img1" />
+</div>
+
+//this will set the size of the image
+
+.container {
+	display: inline-block;
+	height: 22px;
+	width: 20px;
+}
+
+background-image: linear-gradient(to left bottom, red, blue);
+background-image: linear-gradient(30deg, red, blue);
+background-image: radial-gradient(circle at top left, red, blue);
+background-image: radial-gradient(circle at 30% 50%, red, blue);
+background-image: radial-gradient(ellipse, red, blue);
+
+//multiple backgrounds
+background: linear-gradient(circle, red, blue), url("images/image1.png") left 10% bottom 20%/cover no-repeat border-box, red;
+
+<div></div>
+
+.div {
+	background: url("images/image1.png");
+	filter: blue(5px);
+	filter: grayscale(50%);
+}
+
+you can also style svgs
+
+img vs background-image
+- img is better for accesibility but more difficult to style
+- background-image can be sized and position easier
+
+
+Units
+pixels px
+percentages %
+root em rem
+em em
+viewport height vh
+viewport width vw
+
+
+where units matter
+
+font-size
+padding
+border
+margin
+width
+height
+top
+bottom
+left
+right
+
+how the size is calculated
+
+absolute lengths            viewport lengths            font-relative lengths
+most ignore user settings   adjust current viewport     adjust to default font size
+px                          vh                          rem
+cm (should avoid these)     vw                          em
+mm (should avoid these)     vmin
+                            vmax
+                            %                           %
+
+             Rules to remember
+
+                        Viewport <----element position:fixed;
+
+position: absolute;     Ancestor
+postion: relative;      content <----element position:absolute;
+position: fixed;        + padding
+position: sticky;
+
+
+block level element     Ancestor <----element position: static;
+                        content               position: relative;
+
+
+html {
+	font-size: 75%;
+}
+
+max-width: 580px;
+min-width: 350px;
+
+font-size: 2em;
+
+font-size: 1.1rem;
+- take the browser font-size and multiply by 1.1
