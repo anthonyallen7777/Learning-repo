@@ -7,7 +7,7 @@ import './IngredientForm.css';
 const IngredientForm = props => {
   // const [inputState, setInputState] = useState({title: '', amount: ''});
   const [enteredTitle, setEnteredTitle] = useState('');
-  const [enteredAmount, setenteredAmount] = useState('');
+  const [enteredAmount, setEnteredAmount] = useState('');
 
   const submitHandler = event => {
     event.preventDefault();
@@ -28,7 +28,7 @@ const IngredientForm = props => {
           <div className="form-control">
             <label htmlFor="amount">Amount</label>
             <input type="number" id="amount" value={enteredAmount}
-            onChange={event => setenteredAmount(event.target.value)}
+            onChange={event => setEnteredAmount(event.target.value)}
           />
           </div>
           <div className="ingredient-form__actions">

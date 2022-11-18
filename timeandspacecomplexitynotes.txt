@@ -1,0 +1,69 @@
+time complexity
+
+loops
+
+for (i=1; i <= n; i++) {
+	x = y + z; //constant time = C
+}
+
+= C*n // in large operations the constant being multiplied becomes irrelevant
+= O(n)
+
+nested loops
+
+for (i=1; i <= n; i++) { // n times
+	for (j = 1; j <= n; j++) { // n times
+		x = y + z; // constant time = C
+	}
+}
+
+= C*n*n
+= C*n^2
+= O(n^2)
+
+sequential statements
+
+a = a + b; //constant time = C1
+
+for (i = 1; i<= n; i++) { // n times
+	x = y + z; //constant time = C2
+} C2 * n
+
+for (j = 1; j <= n; j++) { // n times
+	c = d + e; //constant time = C3
+} C3 * n
+
+C1 + C2*n + C3*n
+= O(n)
+
+if-else statements
+
+if(condition)
+{
+	--- O(n)
+}
+else {
+	--- O(n^2)
+}
+
+= O(n^2) //bigger time complexity wins
+
+O(1) < O(log(n)) < O(n) < O(n log(n)) < O(n^c) < O(n!)
+
+space complexity
+
+{
+	int a, b, c;
+	int z = a + b + c;
+	return (z);
+}
+
+int takes 4B
+
+4 * 4 + 4
+= 20B
+
+space-time trade-off and efficiency
+- trade-off between memory use and runtime performance
+- speace efficiency and time efficiency rach at two opposite ends
+- the more time efficiency you have, the less spce efficiency you have and vice versa.
