@@ -112,3 +112,15 @@ pally and ax
 lighthouse
 circle ci and github actions
 learn github
+
+
+
+<label htmlFor="word-input">Word</label>
+<input id="word-input" />
+
+by adding the htmlFor and id when you click on the label it focuses on the input
+
+Accessibility is very important
+
+Dont overload variable names
+- similar variable names cant confuse you

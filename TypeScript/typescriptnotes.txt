@@ -1,0 +1,18 @@
+TypeScript
+- really just a superset to JavaScript
+- offers more features than vanillaJS (Types, Classes, Interfaces, etc.)
+
+
+in TypeScript you define if a variable is a number, string, or something else
+- this allows the writing of more robust code
+- the code gets checked at the time you write and not just a time it is ran
+
+
+TypeScript doesn't run in the browser
+- gets compiled to JavaScript
+
+TypeScript
+    |
+    |
+    v
+JavaScript
