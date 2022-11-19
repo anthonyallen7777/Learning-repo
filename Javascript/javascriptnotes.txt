@@ -1,0 +1,450 @@
+THE CALL STACK
+javascript is single threaded which means == one call stack which means == it can do one thing at a time
+
+call stack
+- a data structure which records where in the program we are
+- if we step into a function we push something onto the stack
+- if we return from a function we pop off the top of the stack
+
+function multiply(a, b) {
+	return a * b;
+}
+
+function square(n) {
+	return multiply(n, n);
+}
+
+function printSquare(n) {
+	var squared = square(n);
+	console.log(squared);
+}
+
+printSquare(4);
+
+STACK
+
+multiply(n, n)     <--- POPPED OFF
+square(n)
+printSquare(4)
+main()
+
+square(n)          <--- POPPED OFF
+printSquare(4)
+main()
+
+console.log(squared) <- POPPED OFF
+printSquare(4)
+main()
+
+printSquare(4)     <--- POPPED OFF
+main()
+
+main()
+
+DONE
+
+
+
+
+
+function foo() {
+	throw new Error('Oops!');
+}
+
+function bar() {
+	foo();
+}
+
+function baz() {
+	bar();
+}
+
+baz();
+
+Uncaught Error: Oops!
+foo
+bar
+baz
+(anonymous function)
+
+
+
+
+
+blowing the stack
+
+function foo() {
+	return foo();
+}
+
+foo();
+
+
+Call Stack
+foo()
+foo()
+foo()
+foo()
+foo()
+foo()
+foo()
+foo()
+main()
+
+
+
+
+blocking
+what happens when things are slow?
+- code that is slow
+- things that are slow which are on the stack
+
+
+var foo = $.getSync('//foo.com');
+var bar = $.getSync('//bar.com');
+var qux = $.getSync('//qux.com');
+
+console.log(foo);
+console.log(bar);
+console.log(qux);
+
+
+STACK
+
+$.getSync('//foo.com') <--- wait
+main()
+
+$.getSync('//bar.com') <--- wait
+main()
+
+$.getSync('//qux.com') <--- wait
+main()
+
+console.log(foo)
+main()
+
+console.log(bar)
+main()
+
+console.log(qux)
+main()
+
+
+
+
+
+
+
+
+
+
+
+
+----
+PROMISES
+- a promise is an object representing the eventual completion or failure of an async operation
+
+callbacks are attached to the returned promise object, instead of being passed into a function
+
+const promise = doSomething();
+const promise2 = promise.then(sucessCallback, failureCallback);
+
+promise2 represents the completion not just of doSomething() but also of the successCallback or failurCallback you passed in - which can be other async functions returning a promise. When that's the case any callbacks added to promise2 get queuued behind the promise returned by either successCallback or failureCallback
+
+
+doSomething()
+  .then(function (result) {
+    return doSomethingElse(result);
+  })
+  .then(function (newResult) {
+    return doThirdThing(newResult);
+  })
+  .then(function (finalResult) {
+    console.log(`Got the final result: ${finalResult}`);
+  })
+  .catch(failureCallback);
+
+same thing with arrow functions
+
+doSomething()
+  .then((result) => doSomethingElse(result))
+  .then((newResult) => doThirdThing(newResult))
+  .then((finalResult) => {
+    console.log(`Got the final result: ${finalResult}`);
+  })
+  .catch(failureCallback);
+
+Always return results, otherwise callbacks won't catch the result of a previous promise
+
+Always return results, otherwise callbacks won't catch the result of a previous promise
+
+Therefore, as a rule of thumb, whenever your operation encounters a promise, return it and defer its handling to the next then handler.
+
+
+doSomething()
+  .then((url) => fetch(url))
+  .then((res) => res.json())
+  .then((data) => {
+    listOfIngredients.push(data);
+  })
+  .then(() => {
+    console.log(listOfIngredients);
+  });
+
+promise nesting
+Simple promise chains are best kept flat without nesting, as nesting can be a result of careless composition
+
+doSomethingCritical()
+  .then((result) =>
+    doSomethingOptional(result)
+      .then((optionalResult) => doSomethingExtraNice(optionalResult))
+      .catch((e) => {}),
+  ) // Ignore if optional stuff fails; proceed.
+  .then(() => moreCriticalStuff())
+  .catch((e) => console.error(`Critical failure: ${e.message}`));
+
+promise chaining after catch
+
+new Promise((resolve, reject) => {
+  console.log("Initial");
+
+  resolve();
+})
+  .then(() => {
+    throw new Error("Something failed");
+
+    console.log("Do this");
+  })
+  .catch(() => {
+    console.error("Do that");
+  })
+  .then(() => {
+    console.log("Do this, no matter what happened before");
+  });
+
+[Output]
+Initial
+Do that
+Do this, no matter what happened before
+
+Promises solve a fundamental flaw with the callback pyramid of doom, by catching all errors, even thrown exceptions and programming errors. This is essential for functional composition of asynchronous operations.
+
+There are four composition tools for running asynchronous operations concurrently: Promise.all(), Promise.allSettled(), Promise.any(), and Promise.race()
+
+We can start operations in parallel and wait for them all to finish like this:
+
+Promise.all([func1(), func2(), func3()]).then(([result1, result2, result3]) => {
+  // use result1, result2 and result3
+});
+
+[func1, func2, func3]
+  .reduce((p, f) => p.then(f), Promise.resolve())
+  .then((result3) => {
+    /* use result3 */
+  });
+
+The code above is equivalent to:
+Promise.resolve()
+  .then(func1)
+  .then(func2)
+  .then(func3)
+  .then((result3) => {
+    /* use result3 */
+  });
+
+
+However, before you compose promises sequentially, consider if it's really necessary — it's always better to run promises in parallel so that they don't unnecessarily block each other unless one promise's execution depends on another's result.
+---
+ASYNC FUNCTION
+The async function declaration declares an async function where the await keyword is permitted within the function body. The async and await keywords enable asynchronous, promise-based behavior to be written in a cleaner style, avoiding the need to explicitly configure promise chains.
+
+function resolveAfter2Seconds() {
+  return new Promise(resolve => {
+    setTimeout(() => {
+      resolve('resolved');
+    }, 2000);
+  });
+}
+
+async function asyncCall() {
+  console.log('calling');
+  const result = await resolveAfter2Seconds();
+  console.log(result);
+  // expected output: "resolved"
+}
+
+asyncCall();
+
+[OUTPUT]
+> "calling"
+> "resolved"
+
+Async functions always return a promise. If the return value of an async function is not explicitly a promise, it will be implicitly wrapped in a promise. 
+
+async function foo() {
+  return 1;
+}
+
+similar to this:
+function foo() {
+  return Promise.resolve(1);
+}
+
+Even though the return value of an async function behaves as if it's wrapped in a Promise.resolve, they are not equivalent.
+
+An async function will return a different reference, whereas Promise.resolve returns the same reference if the given value is a promise.
+
+It can be a problem when you want to check the equality of a promise and a return value of an async function.
+
+const p = new Promise((res, rej) => {
+  res(1);
+});
+
+async function asyncReturn() {
+  return p;
+}
+
+function basicReturn() {
+  return Promise.resolve(p);
+}
+
+console.log(p === basicReturn()); // true
+console.log(p === asyncReturn()); // false
+
+
+async function foo() {
+  await 1;
+}
+
+It is also equivalent to:
+
+function foo() {
+  return Promise.resolve(1).then(() => undefined);
+}
+
+async function foo() {
+  const p1 = new Promise((resolve) => setTimeout(() => resolve("1"), 1000));
+  const p2 = new Promise((_, reject) => setTimeout(() => reject("2"), 500));
+  const results = [await p1, await p2]; // Do not do this! Use Promise.all or Promise.allSettled instead.
+}
+foo().catch(() => {}); // Attempt to swallow all errors...
+
+async function declarations are hoisted to the top of their scope and can be called anywhere in their scope.
+
+async functions and execution order
+
+function resolveAfter2Seconds() {
+  console.log("starting slow promise");
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve("slow");
+      console.log("slow promise is done");
+    }, 2000);
+  });
+}
+
+function resolveAfter1Second() {
+  console.log("starting fast promise");
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve("fast");
+      console.log("fast promise is done");
+    }, 1000);
+  });
+}
+
+async function sequentialStart() {
+  console.log("==SEQUENTIAL START==");
+
+  // 1. Execution gets here almost instantly
+  const slow = await resolveAfter2Seconds();
+  console.log(slow); // 2. this runs 2 seconds after 1.
+
+  const fast = await resolveAfter1Second();
+  console.log(fast); // 3. this runs 3 seconds after 1.
+}
+
+async function concurrentStart() {
+  console.log("==CONCURRENT START with await==");
+  const slow = resolveAfter2Seconds(); // starts timer immediately
+  const fast = resolveAfter1Second(); // starts timer immediately
+
+  // 1. Execution gets here almost instantly
+  console.log(await slow); // 2. this runs 2 seconds after 1.
+  console.log(await fast); // 3. this runs 2 seconds after 1., immediately after 2., since fast is already resolved
+}
+
+function concurrentPromise() {
+  console.log("==CONCURRENT START with Promise.all==");
+  return Promise.all([resolveAfter2Seconds(), resolveAfter1Second()]).then(
+    (messages) => {
+      console.log(messages[0]); // slow
+      console.log(messages[1]); // fast
+    }
+  );
+}
+
+async function parallel() {
+  console.log("==PARALLEL with await Promise.all==");
+
+  // Start 2 "jobs" in parallel and wait for both of them to complete
+  await Promise.all([
+    (async () => console.log(await resolveAfter2Seconds()))(),
+    (async () => console.log(await resolveAfter1Second()))(),
+  ]);
+}
+
+// sequentialStart(); // after 2 seconds, logs "slow", then after 1 more second, "fast"
+
+// wait above to finish
+// setTimeout(concurrentStart, 4000); // after 2 seconds, logs "slow" and then "fast"
+
+// wait again
+// concurrentPromise()
+// setTimeout(concurrentPromise, 7000); // same as concurrentStart
+
+// wait again
+// parallel()
+// setTimeout(parallel, 10000); // truly parallel: after 1 second, logs "fast", then after 1 more second, "slow"
+
+
+----
+JAVASCRIPT HOISTING
+JavaScript Hoisting refers to the process whereby the interpreter appears to move the declaration of functions, variables or classes to the top of their scope, prior to execution of the code.
+
+In colloquial terms, any of the following behaviors may be regarded as hoisting:
+
+1. Being able to use a variable's value in its scope before the line it is declared. ("Value hoisting")
+2. Being able to reference a variable in its scope before the line it is declared, without throwing a ReferenceError, but the value is always undefined. ("Declaration hoisting")
+3. The declaration of the variable causes behavior changes in its scope before the line in which it is declared.
+
+The four function declarations above are hoisted with type 1 behavior; var declaration is hoisted with type 2 behavior; let, const, and class declarations (also collectively called lexical declarations) are hoisted with type 3 behavior.
+
+----
+CALLBACK FUNCTION
+- a callback function is a function passed into another function as an argument, which is then invoked inside the outer function to complete some kind of routine or action
+
+function greeting(name) {
+  alert(`Hello, ${name}`);
+}
+
+function processUserInput(callback) {
+  const name = prompt("Please enter your name.");
+  callback(name);
+}
+
+processUserInput(greeting);
+
+The above example is a synchronous callback, as it is executed immediately.
+
+however, that callbacks are often used to continue code execution after an asynchronous operation has completed — these are called asynchronous callbacks.
+A good example is the callback functions executed inside a .then() block chained onto the end of a promise after that promise fulfills or rejects. 
+This structure is used in many modern web APIs, such as fetch()
+
+----
+AWAIT
+The await operator is used to wait for a Promise and get its fulfillment value. It can only be used inside an async function or at the top level of a module.
+
+await is usually used to unwrap promises by passing a Promise as the expression. Using await pauses the execution of its surrounding async function until the promise is settled (that is, fulfilled or rejected). When execution resumes, the value of the await expression becomes that of the fulfilled promise.
+
+

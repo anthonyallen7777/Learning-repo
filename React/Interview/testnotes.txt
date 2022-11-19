@@ -1,0 +1,114 @@
+Map over an array of objects
+
+const users = [
+  { name: "John Doe", id: 1 },
+  { name: "Jane Doe", id: 2 },
+  { name: "Billy Doe", id: 3 }
+];
+
+function App() {
+    const listItems = users.map((obj) => {
+    for (const [key, value] of Object.entries(obj)) {
+      return <li>{key}: {value}</li>;
+    }
+    return null;
+  });
+  return (
+    <>
+      <h3>User names</h3>
+      <ul>
+         {listItems}
+      </ul>
+    </>
+  );
+}
+
+disable button
+
+function App() {
+  const [value, setValue] = React.useState("");
+
+  return (
+    <>
+      <h3>Disable Button Challenge</h3>
+      <input type="text" onChange={(e) => setValue(e.target.value)} />
+      <button disabled={value.length < 1}>Submit</button>
+    </>
+  );
+}
+
+update parent
+
+function Child({ setValue }) {
+  const updateParent = useCallback(() => {
+  }, []);
+  return (
+    <>
+      <div>Child</div>
+      <button onClick={() => setValue("Parent has been updated!")}>
+        Change Parent Value
+      </button>
+    </>
+  );
+}
+
+function Parent() {
+  const [value, setValue] = React.useState(
+    "I need to be updated from my child"
+  );
+
+  return (
+    <>
+      <h3>Update Parent State Challenge (Using Callback)</h3>
+      <div className="wrapper">
+        <div>Parent</div>
+        <div className="box-wrapper">{value}</div>
+      </div>
+
+      <div className="wrapper">
+        <Child setValue={setValue} />
+      </div>
+    </>
+  );
+}
+
+
+sum of two numbers
+
+function App() {
+  const [number1, setNumber1] = React.useState();
+  const [number2, setNumber2] = React.useState();
+  const [total, setTotal] = React.useState(0);
+
+  return (
+    <div>
+      <h2>Adding Two Numbers</h2>
+      <input placeholder="First Number" type="number"
+        onChange={(e)=>setNumber1(e.target.value)}/>
+      <input placeholder="Second Number" type="number"
+        onChange={(e)=>setNumber2(e.target.value)}/>
+
+      <button
+        onClick={()=>setTotal(parseInt(number1)+parseInt(number2))}
+        >Add Two Numbers</button>
+      <p>Total: {total}</p>
+    </div>
+  );
+}
+
+
+
+
+
+
+
+
+
+need to study
+closures
+integration tests
+cicd
+pally and ax
+lighthouse
+circle ci and github actions
+learn github
