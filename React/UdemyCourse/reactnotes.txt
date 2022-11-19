@@ -768,7 +768,7 @@ font-size: 1.2rem; //scales the font-size based on the font-size the user select
 					|
 					|
 					v
-[['salad', 1], ['bacon', 1], ['cheese', 2], ['meat', 2]]
+[ ['salad', 1], ['bacon', 1], ['cheese', 2], ['meat', 2] ]
 
 
 reduce((arr, el) => {

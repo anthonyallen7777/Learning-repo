@@ -112,7 +112,15 @@ pally and ax
 lighthouse
 circle ci and github actions
 learn github
+materialUI
+bootstrap
+coffeeScript
 
+er diagram
+amazon s3
+lambda
+api gateway
+sqsq
 
 
 <label htmlFor="word-input">Word</label>
@@ -124,3 +132,31 @@ Accessibility is very important
 
 Dont overload variable names
 - similar variable names cant confuse you
+
+TESTING
+testing is good for large projects/companies
+
+have tests that describe what the functions, components, and modules are suppose to do
+
+so someone can go and read the test and verify certain functionailities before you even need to read through the code
+
+
+(test1)
+ID NAME PRIORITY LEAD
+1  BOB     3       1
+3  SUZY    2
+4  RICK    0
+5  CODY    1
+2  ZACH    3       1
+9  TINA    3       1
+7 JAMES    3
+- every entry needs to be sorted by priority
+- every person can either be a leader or follower
+- a leader and a follower have to be grouped together regardless of their priority
+- EDGE CASE: IF BOB IS NOT IN THE LIST NO NEED TO GROUP ZACH AND TINA TOGETHER
+- also they must be sorted by name
+
+
+----
+INTERVIEW COURSE
+
