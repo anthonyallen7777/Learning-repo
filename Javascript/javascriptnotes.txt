@@ -518,3 +518,49 @@ await is usually used to unwrap promises by passing a Promise as the expression.
 .reduce()
 
 executes a user-supplied "reducer" callback function on each element of the array, in order, passing in the return value from the calculation on the preceding element. The final result of running the reducer across all elements of the array is a single value
+
+----
+
+TYPESCRIPT NOTES
+- static typing
+- code completion
+- refactoring
+- shorthand notations
+
+
+Statically-typed
+(C++, C#, Java)
+
+int number = 10;
+
+
+Dynamically-typed
+(JavaScript, Python, Ruby)
+
+let number = 10;
+number = "a";
+Math.round(number);
+
+Typescript
+- javascript with type checking
+
+
+let x: number = 10;
+x = "a"; <--- catches it here
+
+
+drawbacks
+- compilation
+
+
+.ts -> compiler -> js
+transpilation
+
+have to be a bit more disciplined
+
+
+TypeScript
+- mediums to large projects
+
+Javascript
+- small projects

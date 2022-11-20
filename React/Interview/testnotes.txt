@@ -155,7 +155,40 @@ ID NAME PRIORITY LEAD
 - a leader and a follower have to be grouped together regardless of their priority
 - EDGE CASE: IF BOB IS NOT IN THE LIST NO NEED TO GROUP ZACH AND TINA TOGETHER
 - also they must be sorted by name
+---
 
+LEETCODE
+  Code basic data structures yourself. BSTs, hash tables, linked lists, etc.
+
+  Do medium problems, but cheat when you’re stuck. There’s 1000+ Leetcode problems, cheating on a few 100 wont kill you.
+
+  Once you’re stuck, read the relevant section in your algorithms textbook of choice. I like the Algorithm Designs Manual
+
+  Do a few easy problems in the area you got stuck.
+
+  Repeat until you’re good
+
+Codewars
+
+(graph, DP, string stugff)
+
+data structure/algorithm book
+
+https://www.youtube.com/playlist?list=PLpPXw4zFa0uKKhaSz87IowJnOTzh9tiBk
+
+Linked lists
+
+- Stacks
+
+- Queues
+
+- Trees
+
+- Graphs
+
+- Heaps
+
+- Hash tables
 
 ----
 INTERVIEW COURSE

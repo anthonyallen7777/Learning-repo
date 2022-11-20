@@ -705,6 +705,40 @@ Context
 - helps handle cases where you need certain data in multiple components and you dont want to pass that state across multiple layers
 - object, array, string, or number that can be passed between React components without using props
 
+const themes = {
+  light: {
+    foreground: "#000000",
+    background: "#eeeeee"
+  },
+  dark: {
+    foreground: "#ffffff",
+    background: "#222222"
+  }
+};
+
+const ThemeContext = React.createContext(themes.light);
+
+function App() {
+  return (
+    <ThemeContext.Provider value={themes.dark}>
+      <Toolbar />
+    </ThemeContext.Provider>
+  );
+}
+
+function Toolbar(props) {
+  return (
+    <div>
+      <ThemedButton />
+    </div>
+  );
+}
+
+function ThemedButton() {
+  const theme = useContext(ThemeContext);  return (    <button style={{ background: theme.background, color: theme.foreground }}>      I am styled by theme context!    </button>  );
+}
+
+
 contextType
 
 auth-context.js
@@ -1654,7 +1688,26 @@ const filteredIngredientsHandler = useCallback(filteredIngredients => {
 ----
 
 useRef
+- returns a mutable ref object whose .current property is initialized to the passed argument (initialValue). The returned object will persist for the full lifetime of the component.
 - allows you to create a reference
+
+const refContainer = useRef(initialValue);
+
+function TextInputWithFocusButton() {
+  const inputEl = useRef(null);
+  const onButtonClick = () => {
+    // `current` points to the mounted text input element
+    inputEl.current.focus();
+  };
+  return (
+    <>
+      <input ref={inputEl} type="text" />
+      <button onClick={onButtonClick}>Focus the input</button>
+    </>
+  );
+}
+
+--
 
 const inputRef = useRef();
 
@@ -1663,6 +1716,9 @@ ref={inputRef}
 type="text"
 value={enteredFilter}
 onChange={event => setEnteredFilter(event.target.value)}/>
+
+
+Keep in mind that useRef doesn’t notify you when its content changes. Mutating the .current property doesn’t cause a re-render. If you want to run some code when React attaches or detaches a ref to a DOM node, you may want to use a callback ref instead.
 
 ----
 
@@ -1688,6 +1744,62 @@ useReducer()
 - useReducer() has no connection to the REdux library
 - React will re-render the component whenever your reducer returns the new state
 - useful when you have more complex state, state that relies on the old state, or if multiple state values work together
+
+const initialState = {count: 0};
+
+function reducer(state, action) {
+  switch (action.type) {
+    case 'increment':
+      return {count: state.count + 1};
+    case 'decrement':
+      return {count: state.count - 1};
+    default:
+      throw new Error();
+  }
+}
+
+function Counter() {
+  const [state, dispatch] = useReducer(reducer, initialState);
+  return (
+    <>
+      Count: {state.count}
+      <button onClick={() => dispatch({type: 'decrement'})}>-</button>
+      <button onClick={() => dispatch({type: 'increment'})}>+</button>
+    </>
+  );
+}
+--
+specifying initial state
+const [state, dispatch] = useReducer(
+    reducer,
+    {count: initialCount}  );
+--
+lazy initializing state
+function init(initialCount) {  return {count: initialCount};}
+function reducer(state, action) {
+  switch (action.type) {
+    case 'increment':
+      return {count: state.count + 1};
+    case 'decrement':
+      return {count: state.count - 1};
+    case 'reset':      return init(action.payload);    default:
+      throw new Error();
+  }
+}
+
+function Counter({initialCount}) {
+  const [state, dispatch] = useReducer(reducer, initialCount, init);  return (
+    <>
+      Count: {state.count}
+      <button
+        onClick={() => dispatch({type: 'reset', payload: initialCount})}>        Reset
+      </button>
+      <button onClick={() => dispatch({type: 'decrement'})}>-</button>
+      <button onClick={() => dispatch({type: 'increment'})}>+</button>
+    </>
+  );
+}
+--
 
 const ingredientReducer = (currentIngredients, action) => {
   switch (action.type) {
@@ -1756,16 +1868,27 @@ const App = props => {
 
 ----
 
+memoization
+- or memoisation is an optimization technique used primarily to speed up computer programs by storing the results of expensive function calls and returning the cached result when the same inputs occur again
+
 useMemo()
+- Pass a “create” function and an array of dependencies. useMemo will only recompute the memoized value when one of the dependencies has changed. This optimization helps to avoid expensive calculations on every render.
 - hook where you can save a value so the value isn't re-created, another way of memorizing a component
 - if you're storing components you typically want to use react memo instead of useMemo BUT with useMemo you store any data which you don't want to re-create on every re-render cycle (an operation that calculates a more complex value, a longer calculation, use useMemo)
 - first argument, a function that react will execute for and should return the value that you want to memorize
 - second argument, a list of dependencies (this tells react when it should re-run this function to create a new object that it should memorize)
 -shouldn't wrap every component with react memo or useMemo b/c react always needs to check whether props changed and if it's a super small component re-rendering it might be faster then do that check
 
+const memoizedValue = useMemo(() => computeExpensiveValue(a, b), [a, b]);
+
+--
+
 const ingredientList = useMemo(() => {
     return <IngredientList ingredients={userIngredients} onRemoveItem={removeIngredientHandler} />
   }, [userIngredients, removeIngredientHandler]);
+
+
+You may rely on useMemo as a performance optimization, not as a semantic guarantee. In the future, React may choose to “forget” some previously memoized values and recalculate them on next render, e.g.u to free memory for offscreen components. Write your code so that it still works without useMemo — and then add it to optimize performance.
 
 ----
 
