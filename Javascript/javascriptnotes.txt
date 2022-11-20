@@ -564,3 +564,136 @@ TypeScript
 
 Javascript
 - small projects
+
+
+sourcemap
+- file that specifies how each line of our typecript code map to the generated javascript code
+
+
+built-in types
+javascript
+number
+string
+boolean
+null
+undefined
+object
+
+typescript
+any
+unknown
+never
+enum
+tuple
+
+
+
+restrict tuples to 2 values anything more will make code hard to understand
+
+always properly annotate functions, parameters, and return types
+
+enable this configurations in tsconfig.json
+"noUnusedLocals": true
+"noUnusedParameters": true,
+"noImplicitReturns": true
+
+
+DRY
+Don't Repeat Yourself
+
+
+using the unknown type is preferred to the any type
+- b/c the compiler forces us to do some type checking
+
+programming paradigms
+- procedural
+- functional
+- object-oriented
+- event-driven
+- aspect-oriented
+...
+
+Java & Javascript
+- both support some object-oriented and functional programming techniques
+
+Object
+- Data (state)
+- Operations (behavior)
+
+Person
+- name (property)
+- email (property)
+- talk() (method)
+- dance() (method)
+
+property
+- value inside an object
+
+method
+- a function inside an object
+
+
+functional programming
+- functions are the building blocks of application
+
+object-oriented programming
+- objects are the building blocks of application
+
+
+classes
+- a class is a blueprint for creating objects
+
+Account
+properties
+Id
+Owner
+Balance
+
+methods
+
+
+constructor
+- a special function or method inside a class that is used for initializing an object
+
+
+access modifiers
+- public
+- private
+- protected
+
+Only use private properties for writing robust code, never for secure user data
+
+static property
+- a property that belongs to a class and not an object
+- only one instance in memory
+
+this. <-- references the current object
+
+method overriding
+- means to change the methods implementation
+
+polymorphism
+- an object can take many forms
+
+printNames([
+	new Student(1, 'John', 'Smith'),
+	new Teach('Joe', 'Mama')
+])
+
+function printNames(people: Person[]) {
+	for (let person of people)
+		console.log(person.fullName);
+}
+
+Open closed principle
+- classes should be open for extension
+and closed for modification
+- just a guiding principle
+
+Private vs Protected Members
+- private members can only be accessed from inside the class
+- protected are the same as private members but they are inherited whereas private members are not
+- don't use protected members to often b/c they can cause coupling
+
+
+Abstract Classes and Methods
