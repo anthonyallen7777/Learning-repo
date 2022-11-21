@@ -696,4 +696,5 @@ Private vs Protected Members
 - don't use protected members to often b/c they can cause coupling
 
 
-Abstract Classes and Methods
+Interfaces
+- only declarations
