@@ -122,6 +122,13 @@ lambda
 api gateway
 sqsq
 
+javascript
+mongodb
+javascript unit tests
+typescript
+react native
+github actions
+
 
 <label htmlFor="word-input">Word</label>
 <input id="word-input" />
@@ -190,6 +197,35 @@ Linked lists
 
 - Hash tables
 
-----
-INTERVIEW COURSE
 
+
+----
+
+build a calendar app
+build a to-do app
+builda messaging app
+
+
+
+
+
+
+
+
+
+
+
+
+
+jenkins
+github
+
+Scoping rules, closures, how js prototype works, the different iterative methods, expressions, reference objects, etc
+
+paired down e-commerce site
+
+add courses to LinkedIn
+
+Concentrate on abstractions and the structure of your code so you can speak to the maintainability and extensibility
+
+Think of a new feature and explain how you would integrate it into your current system
