@@ -700,3 +700,18 @@ Interfaces
 - only declarations
 
 
+----
+SECONDS TYPESCRIPT
+- better version of javascript
+- browsers cant execute it!
+- compiled to javascript
+
+
+why use TypeScript?
+
+function add(num1, numb2) {
+  return num1 + num2;
+}
+
+console.log(add('2','3'))
+//OUTPUT: '23'
