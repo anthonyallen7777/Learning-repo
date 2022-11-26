@@ -37,3 +37,30 @@ automatically
 - You don't define that same variable has to hold
 a certain value(e.g. a number)
 - Data types are not set in stone but can change
+
+----
+
+Javascript runs on a host environment
+Browser-side
+- javascript was invented to be run
+in the browser
+- javascript can manipulate HTML code,
+CSS, send background Http requests &
+much more
+- javascript can't access the local
+filesystem, interact with the operating
+system
+
+"Other" (e.g. Server-side)
+- Google's JavaScript Engine (V8) was
+extracted to run JavaScript anywhere
+(called "Node.js")
+- Node.js can be executed on any machine
+and is therefore often used to build web backends
+(server-side Javascript)
+- Node.js CAN access the local filesystem,
+interact with the operating system etc. It CAN'T
+manipulate HTML or CSS
+
+
+----
