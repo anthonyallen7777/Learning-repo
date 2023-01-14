@@ -64,3 +64,10 @@ manipulate HTML or CSS
 
 
 ----
+
+Variable & Constants
+
+variable: a "data container" / "data storage"
+
+let userName = 'Joe';
+userName = 'Mama';
