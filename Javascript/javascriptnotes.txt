@@ -71,3 +71,27 @@ variable: a "data container" / "data storage"
 
 let userName = 'Joe';
 userName = 'Mama';
+
+let = value can change!
+
+const totalUsers = 15;
+
+const = values cannot change!
+
+Variable Naming
+
+        Allowed
+let userName - camelCase
+let ageGroup5 - Only letters and digits
+let $kindOfSpecial - Starting with $ is allowed
+let _internalValue - Starting with _ is allowed
+
+Not Allowed / Not Recommended
+let user_name - Allowed but bad practice!
+let 21Players - Starting digits not allowed
+let user-b - No special characters!
+let let - Keywords not allowed
+
+
+let curr; // declared but not initialized
+let test = 10; // declared and initialized
