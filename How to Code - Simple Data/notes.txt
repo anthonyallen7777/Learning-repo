@@ -15,3 +15,47 @@ Intuitively:
 - inside to outside
 
 predicates are primitives or functions that produce a boolean value (true or false)
+----
+
+Natural number = all whole numbers except 0
+Whole number = all counting numbers, plus 0
+Integer = all whole numbers, their opposites (-1, -2), 0
+Rational number = any number that can be expressed as a fraction of two integers
+Irrational number = all numbers that can't be expressed as a fraction of two integers (pi, sqrt(7)) (non-repeating or non-terminating decimal)
+
+----
+
+HtDF Recipe
+How to Design Functions
+1. Signature, purpose and stub
+2. Define examples, wrap each in check-expect
+3. Template and inventory
+4. Code the function body
+5. Test and debug until correct
+
+----
+
+Signature:
+Type ... -> Type
+type of data the function consumes and produces
+Primitive types are: Number, Integer, Natural, String, Image, Boolean
+
+Purpose:
+1 line description of what the function produces in terms of what it consumes
+
+Stub is a function definition that:
+- has correct function name
+- has correct number of parameters
+- produces dummy result of correct type
+
+Examples/tests:
+- examples help us understand what the function must do.
+- multiple examples illustrate behavior
+- wrapping in check-expect means they will also serve as unit tests for the completed function
+
+Template:
+the body of the template is the outline of the function
+
+Code function body:
+Use everything written before to know how to complete the function body
+- sometimes helps to elaborate examples to show how the expected value could have been produced
