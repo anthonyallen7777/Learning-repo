@@ -17,9 +17,9 @@ Intuitively:
 predicates are primitives or functions that produce a boolean value (true or false)
 ----
 
-Natural number = all whole numbers except 0
-Whole number = all counting numbers, plus 0
-Integer = all whole numbers, their opposites (-1, -2), 0
+Natural number = all positive whole numbers except 0
+Whole number = all positive counting numbers, plus 0
+Integer = all whole numbers, plus their opposites (-1, -2), plus 0
 Rational number = any number that can be expressed as a fraction of two integers
 Irrational number = all numbers that can't be expressed as a fraction of two integers (pi, sqrt(7)) (non-repeating or non-terminating decimal)
 
@@ -59,3 +59,31 @@ the body of the template is the outline of the function
 Code function body:
 Use everything written before to know how to complete the function body
 - sometimes helps to elaborate examples to show how the expected value could have been produced
+
+---------
+
+HtDD
+
+problem domain					program
+information-(represents)-------->data
+     ^------------(interpret)------|
+
+
+type comment:
+-defines a new type name
+-shows how to form data of that type
+
+template:
+-skeleton for on-argument functions that consume data of this type
+
+Data defintion describes:
+-how to form data of a new type
+-how to represent information as data
+-how to interpret data as information
+-template for operating on data
+
+Data definition simplifies function:
+-restricts data consumed
+-restricts data produced
+-helps generate examples
+-provides template
