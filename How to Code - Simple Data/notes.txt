@@ -87,3 +87,13 @@ Data definition simplifies function:
 -restricts data produced
 -helps generate examples
 -provides template
+
+Atomic data:
+- can't be taken apart into pieces that are meaningfully part of the same problem domain
+
+Data definition consists of four or five parts:
+1. A possible structure definition
+2. A type comment that defines a new type name and describes how to form data
+3. An interpretation that describes the correspondence between information and data
+4. One or more examples of the data
+5. A Template for a 1 argument function operating on data of this type
