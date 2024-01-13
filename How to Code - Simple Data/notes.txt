@@ -14,13 +14,16 @@ Intuitively:
 
 predicates are primitives or functions that produce a boolean value (true or false)
 ----
-
+MATHEMATICS
 Natural number = all positive whole numbers except 0
 Whole number = all positive counting numbers, plus 0
 Integer = all whole numbers, plus their opposites (-1, -2), plus 0
 Rational number = any number that can be expressed as a fraction of two integers
 Irrational number = all numbers that can't be expressed as a fraction of two integers (pi, sqrt(7)) (non-repeating or non-terminating decimal)
 
+COMPUTER SCIENCE
+Natural = all integers starting at 0,1,2,3
+Number = includes all real number 1.3,1.4,2.5
 ----
 
 HtDF Recipe
@@ -95,3 +98,17 @@ Data definition consists of four or five parts:
 3. An interpretation that describes the correspondence between information and data
 4. One or more examples of the data
 5. A Template for a 1 argument function operating on data of this type
+
+atomic distinct means there is a single specific value
+
+use enumeration when domain information consists of two or more distinct values
+
+use itemization when domain information is comprised of 2 or more subclasses, at least one of which is not a distinct data item
+
+mixed data: boolean, number, string
+
+mixed data itemizations templates must be guarded against being called on the wrong type of data
+
+Rules for simplifying mixed data itemization templates:
+- If a given subclass is the last subclass of its type, we can reduce the test to just the guard, ie. (number? c)
+- If all remaing sublasses are of the same type, then we can eliminate all of the guards
