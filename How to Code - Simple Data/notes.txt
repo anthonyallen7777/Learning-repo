@@ -15,6 +15,7 @@ Intuitively:
 predicates are primitives or functions that produce a boolean value (true or false)
 ----
 MATHEMATICS
+Real numbers = positive, negative, large, small, whole numbers, fractions, decimal numbers (1, 15.82, -0.1, 3/4)
 Natural number = all positive whole numbers except 0
 Whole number = all positive counting numbers, plus 0
 Integer = all whole numbers, plus their opposites (-1, -2), plus 0
@@ -63,7 +64,14 @@ Use everything written before to know how to complete the function body
 
 ---------
 
-HtDD
+HtDD Recipe
+
+Data definition consists of four or five parts:
+1. A possible structure definition
+2. A type comment that defines a new type name and describes how to form data
+3. An interpretation that describes the correspondence between information and data
+4. One or more examples of the data
+5. A Template for a 1 argument function operating on data of this type
 
 problem domain					program
 information-(represents)-------->data
@@ -91,13 +99,6 @@ Data definition simplifies function:
 
 Atomic data:
 - can't be taken apart into pieces that are meaningfully part of the same problem domain
-
-Data definition consists of four or five parts:
-1. A possible structure definition
-2. A type comment that defines a new type name and describes how to form data
-3. An interpretation that describes the correspondence between information and data
-4. One or more examples of the data
-5. A Template for a 1 argument function operating on data of this type
 
 atomic distinct means there is a single specific value
 
