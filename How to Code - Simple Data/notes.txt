@@ -113,3 +113,5 @@ mixed data itemizations templates must be guarded against being called on the wr
 Rules for simplifying mixed data itemization templates:
 - If a given subclass is the last subclass of its type, we can reduce the test to just the guard, ie. (number? c)
 - If all remaing sublasses are of the same type, then we can eliminate all of the guards
+
+Identifying the structure of the information is a key step in program design
