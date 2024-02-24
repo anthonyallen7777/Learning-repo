@@ -45,8 +45,8 @@
 
 ;(define (has-landed? r) r) ; stub
 
-(define (has-landed? rd)
-  (cond [(number? rd) rd]
-         [else #t]
+(define (fn-for-rocket-descent rd)
+  (cond [(number? rd) (#false)]
+         [else  (#true)]
          )
   )
