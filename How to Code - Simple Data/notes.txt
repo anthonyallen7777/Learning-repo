@@ -159,3 +159,19 @@ a wish-list entry has a signature, purpose, !!! and a stub
 
 The analysis is hte modle of the programs
 - it correctly describes the structure of the program, just with less detail
+
+KeyEvent is one of:
+- "a"  ;; an enumeration
+- "b"
+       ;; with one value for 
+- " "  ;; each possible key press
+- "\r" ;; a large enumeration
+
+- "up"
+- "down"
+;; interp. represents keyboard events
+
+For large enumerations we do WHITE-BOX TESTING
+- we wll base the test on our knowledge of how the function is coded, not just what it is suppose to do.
+
+white-box test take advantage of knowing the cond has just two cases
