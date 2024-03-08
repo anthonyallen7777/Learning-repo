@@ -4,8 +4,8 @@ b/c starts with primitive = this expression is called a "call to a primitive"
 the "+" is called an operator
 the "2", "(* 3 4)", "(- (+ 1 2) 3)" are called operands
 
-Ratio: A ratio is a comparison of numbers or quantities
-Fraction: represents a part of a whole
+Ratio: A ratio is a comparison of numbers or quantities that are related
+Fraction: represents a number that is part of a whole
 
 To evaluate a primitive call:
 - first reduce operands to values
@@ -23,7 +23,9 @@ Natural number = all positive whole numbers except 0
 Whole number = all positive counting numbers, plus 0
 Integer = all whole numbers, plus their opposites (-1, -2), plus 0
 Rational number = any number that can be expressed as a fraction of two integers
+(expressed as a RATIO)
 Irrational number = all numbers that can't be expressed as a fraction of two integers (pi, sqrt(7)) (non-repeating or non-terminating decimal)
+(cannot be expressed as a RATIO)
 
 COMPUTER SCIENCE
 Natural = all integers starting at 0,1,2,3
@@ -178,3 +180,21 @@ For large enumerations we do WHITE-BOX TESTING
 - we wll base the test on our knowledge of how the function is coded, not just what it is suppose to do.
 
 white-box test take advantage of knowing the cond has just two cases
+
+----------
+Compound Data
+
+define-struct
+
+To form a structure definition:
+(define-struct <name> (<name>...))
+(define-struct pos (x y))
+
+constructor: make-<structor-name>
+selector(s):<structure-name>-<field-name>
+predicate:<structure-name>?
+
+(define-struct pos(x y)): defines:
+construct: make-pos
+selectors: pos-x pos-y
+predicate: pos?
