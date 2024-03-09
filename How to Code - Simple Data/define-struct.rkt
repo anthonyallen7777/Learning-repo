@@ -11,6 +11,6 @@
 (pos-x P1) ;; selector
 (pos-y P2) ;; selector
 
-(pos? P1) ;; predicate ;#true
-(pos? "hello") ;;predicate ;#false
+(pos? P1) ;;      predicate ;#true
+(pos? "hello") ;; predicate ;#false
 

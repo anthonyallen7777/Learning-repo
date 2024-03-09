@@ -198,3 +198,5 @@ predicate:<structure-name>?
 construct: make-pos
 selectors: pos-x pos-y
 predicate: pos?
+
+2 or more values that natural belong together
