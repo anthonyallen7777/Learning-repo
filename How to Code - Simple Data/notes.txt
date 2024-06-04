@@ -78,7 +78,7 @@ Data definition consists of four or five parts:
 4. One or more examples of the data
 5. A Template for a 1 argument function operating on data of this type
 
-problem domain					program
+problem domain				  program
 information-(represents)-------->data
      ^------------(interpret)------|
 
@@ -200,3 +200,58 @@ selectors: pos-x pos-y
 predicate: pos?
 
 2 or more values that natural belong together
+
+MODULO EXPLAINED
+(modulo -26 4)
+;; -1 *(4*7) + 2
+(modulo 7 -9)
+;; -1 *(9*1) + (-2)
+(modulo 7 3)
+;; (3*2) + 1
+----------
+Self-Reference
+represent arbitrarily large amounts of information
+Arbitrary-sized information is information that we don't know the size of in advance
+
+empty ; an empty list of any type of value
+
+(cons "Flames" empty) ;a list of 1 elements
+(cons "Leafs" (cons "Flames" empty)) ; list of 2 elements
+
+list values are formed out of values only, no other expressions
+
+cons can be used to produce lists with more than one type of data
+
+(define L1 (cons "Flames" empty))
+
+(first L1) ;first consumes a list with at least one element and produces the first element of the list
+
+(rest L1) ;consume list and produce all elements except the first
+
+;(... L2) ;how do I get the second element of L2...
+(first (rest L2))
+; how do I get third element of L2...
+(first (rest (rest L2)))
+
+(empty? empty)
+(empty? L1)
+(empty? 1)
+
+Well formed self-reference:
+- at least one base case
+- at least one self refence case
+
+Have a base case example/test(s) first
+- base case tends to be simpler
+- non-base cases tend to rely on it
+
+Have one or more tests in which the list is at least two elements long
+
+Trust the Natural Recursion!
+
+function      base  contribution of first      combination
+sum             0         itself                    +
+count           0            1                      +
+contains-ubc? false  (string=? <x> "UBC")   (if <y> true <nr>)
+----------
+Reference Rule
