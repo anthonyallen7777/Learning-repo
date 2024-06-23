@@ -1,0 +1,14 @@
+;; The first three lines of this file were inserted by DrRacket. They record metadata
+;; about the language level of this file in a form that our tools can easily process.
+#reader(lib "htdp-beginner-reader.ss" "lang")((modname student-card) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #f #t none #f () #f)))
+;; DATA DEFINITIONS
+(define-struct student (name id))
+;; Student is (make-student String Natural)
+;; interp. a student with name and student id
+(define S1 (make-student "Jon" 3554))
+(define S2 (make-student "Carry" 6953))
+
+#;
+(define (fn-for student s)
+  (... (student-name s)
+       (student-id s)))
