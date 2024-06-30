@@ -255,3 +255,8 @@ count           0            1                      +
 contains-ubc? false  (string=? <x> "UBC")   (if <y> true <nr>)
 ----------
 Reference Rule
+----------
+TIMES TO USE HELPER FUNCTIONS
+FUNCTION COMPOSITION
+OPERATE ON ARB-SIZE DATA
+KNOWLEDGE DOMAIN SHIFT
