@@ -262,3 +262,18 @@ OPERATE ON ARB-SIZE DATA
 KNOWLEDGE DOMAIN SHIFT
 ----------
 Binary Search Trees
+while searching a list its small only by 1 at each recursive call
+whereas a BST gets smaller by 1/2 at each recursive call
+on average log(n) tree nodes
+
+- all numbers in left sub-tree have number LESS than the root
+- all numbers in left sub-tree have number GREATER than the root
+
+This rule is called an INVARIANT (it holds true over the whole tree or doesn't VARY)
+
+DATA DEFINITION
+4 parts that naturally go together:
+- use compound data
+
+arbitrary-sized data
+two self-reference cycles along with compound
