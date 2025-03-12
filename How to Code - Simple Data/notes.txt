@@ -277,3 +277,28 @@ DATA DEFINITION
 
 arbitrary-sized data
 two self-reference cycles along with compound
+
+
+----------
+COMPLEX DATA
+----------
+Mutually Recursive Data
+arbitrary arity tree
+         mooc
+          |
+       current
+      /   |       \     \
+     js  lecture  ...  starters
+                        /  |  \
+                      w01 w02 w03
+                              / \
+                             st bst
+each element can have sub-elements or just data
+y axis = arbitarily deep (depth)
+x axis = arbitarily "wide" (breath) (arbitarily many sub-elements)
+
+arbitrary-size in two dimensions requires two cycles in the type reference graph
+
+the self-refernce cycle allows each element to have an abitrary amount of sub-elements, that is, allows the tree to have arbitrary breadth (x-axis)
+
+mutual refernce cycle allows the tree to have arbitrary depth (y-axis)
